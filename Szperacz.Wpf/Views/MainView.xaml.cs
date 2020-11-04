@@ -1,8 +1,7 @@
-﻿using System;
+﻿using MvvmCross.Platforms.Wpf.Views;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,14 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SzperaczUI
+namespace Szperacz.Wpf.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
+    /// Logika interakcji dla klasy MainView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainView : MvxWpfView
     {
-        public MainWindow()
+        public MainView()
         {
             InitializeComponent();
         }
