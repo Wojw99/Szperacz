@@ -1,4 +1,5 @@
 ﻿using MvvmCross.Commands;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,26 @@ namespace Szperacz.Core.ViewModels
 {
     public class MainViewModel : MvxViewModel
     {
+        private readonly IMvxNavigationService _navigationService;
         private string _firstName;
         private string _lastName;
         private ObservableCollection<PersonModel> _personList = new ObservableCollection<PersonModel>();
 
-        public MainViewModel()
+        public MainViewModel(IMvxNavigationService navigationService)
         {
+            _navigationService = navigationService;
+
             AddGuestCommand = new MvxCommand(AddGuest);
+            ChangeViewCommand = new MvxCommand(ChangeView);
+        }
+
+        public IMvxCommand ChangeViewCommand { get; set; }
+        public void ChangeView()
+        {
+            var result = _navigationService.Navigate(new HistoryViewModel());
         }
 
         public bool CanAddGuest => FirstName?.Length > 0 && LastName?.Length > 0;
-
         public IMvxCommand AddGuestCommand { get; set; }
         public void AddGuest()
         {
