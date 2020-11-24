@@ -8,4 +8,14 @@
     <PackageReference Include="MvvmCross" Version="7.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="MvvmCheatSheat\ExampleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>
