@@ -14,11 +14,33 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
-        <!-- Column 1 -->
-        <Label Grid.Column="0" Content="Wyszukiwanie"/>
+
+        <!-- Column 1-->
+        <Label Grid.Column="0"  Content="Wyszukiwanie" HorizontalAlignment="Left" Margin="137,0,0,0" VerticalAlignment="Top" Width="140"/>
+        <Button Grid.Column="0" Content="PL" HorizontalAlignment="Left" Margin="4,10,0,0" VerticalAlignment="Top" Width="46"/>
+        <Button Grid.Column="0" Content="EN" HorizontalAlignment="Left" Margin="50,10,0,0" VerticalAlignment="Top" Width="45"/>
+
+        <TextBox HorizontalAlignment="Center" Margin="0,50,0,0" Text="{Binding Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Top" Width="305" Height="47"/>
+        <TextBox Grid.Column="0" HorizontalAlignment="Left" Margin="10,120,0,0" Text="{Binding Word, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Top" Width="352" Height="47"/>
+
+        <Button mvx:Bi.nd="Command FolderCommand" Grid.Column="0" Content="..." HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="47" Width="42"/>
+        <ComboBox Grid.Column="0" HorizontalAlignment="Left" Margin="363,50,0,0" VerticalAlignment="Top" Width="54" Height="45"/>
+        <ComboBox Grid.Column="0" HorizontalAlignment="Left" Margin="363,120,0,0" VerticalAlignment="Top" Width="54" Height="45"/>
+        <CheckBox Grid.Column="0" IsChecked="{Binding LetterSizeMeans, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Wielkość liter ma znaczenie" HorizontalAlignment="Left" Margin="8,245,0,0" VerticalAlignment="Top" Width="262" Height="29"/>
+        <CheckBox Grid.Column="0" IsChecked="{Binding CreateChart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Utwórz wykres" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Width="174" Height="29"/>
+        <Label Grid.Column="0" Content="Liczba wątków"  HorizontalAlignment="Left" Margin="223,196,0,0" VerticalAlignment="Top" Width="140" />
+        <ComboBox Grid.Column="0"  HorizontalAlignment="Left" Margin="363,200,0,0" VerticalAlignment="Top" Width="54"/>
+        <Button mvx:Bi.nd="Command SearchCommand" Grid.Column="0" Content="OK" HorizontalAlignment="Left" Margin="150,296,0,0" VerticalAlignment="Top" Height="34" Width="89"/>
+
+        <ListBox Grid.Column="0" Margin="10,360,426,101" Grid.ColumnSpan="2"
+                 ItemsSource="{Binding OutputPathList, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalContentAlignment="Stretch"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     ScrollViewer.CanContentScroll="False"/>
+        <CheckBox Grid.Column="0" IsChecked="{Binding AutomaticSelection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Automatyczne zaznaczanie" HorizontalAlignment="Left" Margin="17,620,0,0" VerticalAlignment="Top"/>
 
         <!-- Column 2 -->
         <Label Grid.Column="1" Content="Wykresy"/>
+
     </Grid>
 </views:MvxWpfView>

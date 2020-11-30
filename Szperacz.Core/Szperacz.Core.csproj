@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="MvvmCross" Version="7.1.2" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup>
