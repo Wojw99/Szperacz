@@ -7,40 +7,88 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Szperacz.Wpf.Views"
              mc:Ignorable="d"
-             d:Height="720" d:Width="1280" FontSize="20" Background="White">
+             d:Height="720" d:Width="1280" FontSize="16" Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/> 
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Column 1-->
-        <Label Grid.Column="0"  Content="Wyszukiwanie" HorizontalAlignment="Left" Margin="137,0,0,0" VerticalAlignment="Top" Width="140"/>
-        <Button Grid.Column="0" Content="PL" HorizontalAlignment="Left" Margin="4,10,0,0" VerticalAlignment="Top" Width="46"/>
-        <Button Grid.Column="0" Content="EN" HorizontalAlignment="Left" Margin="50,10,0,0" VerticalAlignment="Top" Width="45"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"/> 
 
-        <TextBox HorizontalAlignment="Center" Margin="0,50,0,0" Text="{Binding Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Top" Width="305" Height="47"/>
-        <TextBox Grid.Column="0" HorizontalAlignment="Left" Margin="10,120,0,0" Text="{Binding Word, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Top" Width="352" Height="47"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
 
-        <Button mvx:Bi.nd="Command FolderCommand" Grid.Column="0" Content="..." HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="47" Width="42"/>
-        <ComboBox Grid.Column="0" HorizontalAlignment="Left" Margin="363,50,0,0" VerticalAlignment="Top" Width="54" Height="45"/>
-        <ComboBox Grid.Column="0" HorizontalAlignment="Left" Margin="363,120,0,0" VerticalAlignment="Top" Width="54" Height="45"/>
-        <CheckBox Grid.Column="0" IsChecked="{Binding LetterSizeMeans, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Wielkość liter ma znaczenie" HorizontalAlignment="Left" Margin="8,245,0,0" VerticalAlignment="Top" Width="262" Height="29"/>
-        <CheckBox Grid.Column="0" IsChecked="{Binding CreateChart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Utwórz wykres" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Width="174" Height="29"/>
-        <Label Grid.Column="0" Content="Liczba wątków"  HorizontalAlignment="Left" Margin="223,196,0,0" VerticalAlignment="Top" Width="140" />
-        <ComboBox Grid.Column="0"  HorizontalAlignment="Left" Margin="363,200,0,0" VerticalAlignment="Top" Width="54"/>
-        <Button mvx:Bi.nd="Command SearchCommand" Grid.Column="0" Content="OK" HorizontalAlignment="Left" Margin="150,296,0,0" VerticalAlignment="Top" Height="34" Width="89"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*"/>
 
-        <ListBox Grid.Column="0" Margin="10,360,426,101" Grid.ColumnSpan="2"
-                 ItemsSource="{Binding OutputPathList, UpdateSourceTrigger=PropertyChanged}"
-                     HorizontalContentAlignment="Stretch"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                     ScrollViewer.CanContentScroll="False"/>
-        <CheckBox Grid.Column="0" IsChecked="{Binding AutomaticSelection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Automatyczne zaznaczanie" HorizontalAlignment="Left" Margin="17,620,0,0" VerticalAlignment="Top"/>
+            <RowDefinition Height="15"/> 
+        </Grid.RowDefinitions>
+        
+        <!-- Column 1, Row 1 -->
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+            <Button Content="PL" MaxHeight="30" Padding="15 0"/>
+            <Button Content="EN" MaxHeight="30" Padding="15 0"/>
+        </StackPanel>
 
+        <!-- Column 1, Row 2 -->
+        <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Grid.Column="0" MinWidth="60" Margin="0 0 20 0" Height="30"
+                    mvx:Bi.nd="Command FolderCommand"
+                    Content="..."/>
+            <TextBox TextWrapping="Wrap" VerticalAlignment="Center" MinWidth="450" Height="30"
+                     Text="{Binding Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <!-- Column 1, Row 3 -->
+        <TextBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" TextWrapping="Wrap" 
+                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="530" Height="30"
+                 Text="{Binding Word, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- Column 1, Row 4 -->
+        <CheckBox Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Padding="10 -4" Height="30" VerticalContentAlignment="Center"
+                  IsChecked="{Binding LetterSizeMeans, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  Content="Wielkość liter ma znaczenie"/>
+
+        <!-- Column 2, Row 4 -->
+        <ComboBox Grid.Column="2" Grid.Row="4" MaxWidth="150" MaxHeight="30"/>
+        
+        <!-- Column 1, Row 5 -->
+        <CheckBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Padding="10 -4" Height="30" VerticalContentAlignment="Center"
+                  IsChecked="{Binding CreateChart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  Content="Utwórz wykres"/>
+
+        <!-- Column 1, Row 6 -->
+        <Button Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" MaxWidth="80" MaxHeight="30"
+                mvx:Bi.nd="Command SearchCommand" 
+                Content="Szukaj"/>
+        
+        <!-- Column 1, Row 7 -->
+        <ListBox Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2"
+                 HorizontalContentAlignment="Stretch" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.CanContentScroll="False"
+                 ItemsSource="{Binding OutputPathList, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- Column 1, Row 8 -->
+        <CheckBox Grid.Column="1" Grid.Row="8" VerticalAlignment="Center" Padding="10 -4" Height="30" VerticalContentAlignment="Center"
+                  IsChecked="{Binding AutomaticSelection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  Content="Automatyczne zaznaczanie"/>
+        
         <!-- Column 2 -->
-        <Label Grid.Column="1" Content="Wykresy"/>
+        <Label Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="8" Background="AliceBlue" Content="Wykresy"/>
 
     </Grid>
 </views:MvxWpfView>
