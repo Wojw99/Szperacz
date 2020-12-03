@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:cl="clr-namespace:Szperacz.Wpf.Controls"   
              xmlns:local="clr-namespace:Szperacz.Wpf.Views"
              mc:Ignorable="d"
              d:Height="720" d:Width="1280" FontSize="16" Background="White">
@@ -16,8 +17,8 @@
             <ColumnDefinition Width="10"/>
 
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
@@ -87,8 +88,24 @@
                   IsChecked="{Binding AutomaticSelection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                   Content="Automatyczne zaznaczanie"/>
         
-        <!-- Column 2 -->
-        <Label Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="8" Background="AliceBlue" Content="Wykresy"/>
+        <!-- Column 5, Row 1 -->
+        <Border Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" Padding="15">
+            <Button mvx:Bi.nd="Command ShowGraph1Command" Background="Transparent" BorderThickness="0">
+                <Image Source="{Binding Chart1Path}"/>
+            </Button>
+        </Border>
+
+        <!-- Column 6, Row 1 -->
+        <Border Grid.Column="6" Grid.Row="1" Grid.RowSpan="2" Padding="0">
+            <Button mvx:Bi.nd="Command ShowGraph2Command" Background="Transparent" BorderThickness="0">
+                <Image Source="{Binding Chart2Path}"/>
+            </Button>
+        </Border>
+
+        <!-- Column 5, Row 2 -->
+        <Border Grid.Column="5" Grid.Row="3" Grid.RowSpan="6" Grid.ColumnSpan="2" Padding="15">
+            <Image Source="{Binding Chart3Path}"/>
+        </Border>
 
     </Grid>
 </views:MvxWpfView>

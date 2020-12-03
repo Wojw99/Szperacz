@@ -1,22 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace Szperacz.Core
 {
     public static class SearchHandler
     {
-        public static List<String> SearchWord(string word, string path, bool createChart, bool letterSizeMeans, bool automaticSelection)
+        private static readonly string pathListPath = "Src/paths.txt";
+        private static readonly string[] chartPaths = new string[] { "Src/chart1.png", "Src/chart2.png", "Src/chart3.png" };
+
+        // D:\Development\GitHub\Szperacz\Szperacz.Core\Src\paths.txt
+        public static bool SearchWord(string word, string path, bool createChart, bool letterSizeMeans, bool automaticSelection)
         {
-            var list = new List<String>();
+            return true;
+        }
 
-            // In this place a function will be calling the python script, waiting for answer and returning a result
-            // For now it returns example paths
-            list.Add("D:\\Users\\Pulpit\\tekst.txt");
-            list.Add("D:\\Users\\Pulpit\\guf.pdf");
-            list.Add("D:\\Users\\Pulpit\\tekst2.doc");
-
+        public static List<String> GetPaths()
+        {
+            var lines = File.ReadAllLines(pathListPath);
+            var list = new List<string>(lines);
             return list;
+        }
+
+        public static List<String> GetChartPaths()
+        {
+            return new List<string>() {
+                @"D:\Development\GitHub\Szperacz\Szperacz.Wpf\Src\chart1.jpg",
+                @"D:\Development\GitHub\Szperacz\Szperacz.Wpf\Src\chart2.jpg",
+                @"D:\Development\GitHub\Szperacz\Szperacz.Wpf\Src\chart3.jpg"
+            };
         }
     }
 }

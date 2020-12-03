@@ -9,12 +9,17 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using Szperacz.Core.Models;
+
 using Ookii.Dialogs.Wpf;
 
 namespace Szperacz.Core.ViewModels
 {
     public class MainViewModel : MvxViewModel
     {
+        private string _chart1Path = "";
+        private string _chart2Path = "";
+        private string _chart3Path = "";
+
         private string _path = "";
         private string _word = "";
         private bool _createChart = false;
@@ -26,6 +31,8 @@ namespace Szperacz.Core.ViewModels
         {
             SearchCommand = new MvxCommand(SearchWord);
             FolderCommand = new MvxCommand(SelectFolder);
+            ShowGraph1Command = new MvxCommand(ShowGraph1);
+            ShowGraph2Command = new MvxCommand(ShowGraph2);
         }
 
         #region Helper Methods
@@ -41,9 +48,37 @@ namespace Szperacz.Core.ViewModels
 
             return true;
         }
+
+        private void ClearGraphs()
+        {
+            Chart1Path = "";
+            Chart2Path = "";
+            Chart3Path = "";
+        }
         #endregion
 
         #region Commands and methods for buttons
+        public IMvxCommand ShowGraph1Command { get; set; }
+        public IMvxCommand ShowGraph2Command { get; set; }
+
+        public void ShowGraph1()
+        {
+            var chart1PathAlias = Chart1Path;
+            var chart3PathAlias = Chart3Path;
+
+            Chart3Path = chart1PathAlias;
+            Chart1Path = chart3PathAlias;
+        }
+
+        public void ShowGraph2()
+        {
+            var chart2PathAlias = Chart2Path;
+            var chart3PathAlias = Chart3Path;
+
+            Chart2Path = chart3PathAlias;
+            Chart3Path = chart2PathAlias;
+        }
+
         // Connected to the select folder button
         public IMvxCommand FolderCommand { get; set; }
         
@@ -68,18 +103,52 @@ namespace Szperacz.Core.ViewModels
         {
             if (IsCorrectPath(Path) && Word.Length > 0)
             {
-                var pathsWithWord = SearchHandler.SearchWord(Word, Path, CreateChart, LetterSizeMeans, AutomaticSelection);
-                OutputPathList = new ObservableCollection<String>(pathsWithWord);
+                var wordFound = SearchHandler.SearchWord(Word, Path, CreateChart, LetterSizeMeans, AutomaticSelection);
+
+                if(wordFound)
+                {
+                    Debug.WriteLine("Debug");
+                    OutputPathList = new ObservableCollection<String>(SearchHandler.GetPaths());
+                }
+                if (CreateChart)
+                {
+                    var graphPaths = SearchHandler.GetChartPaths();
+                    Chart1Path = graphPaths[0];
+                    Chart2Path = graphPaths[1];
+                    Chart3Path = graphPaths[2];
+                }
+                else
+                {
+                    ClearGraphs();
+                }
             }
             else
             {
+                ClearGraphs();
                 OutputPathList = new ObservableCollection<String>();
-                // TODO: send a warning messege to the user
             }
         }
         #endregion
 
         #region Properties
+        public string Chart1Path
+        {
+            get { return _chart1Path; }
+            set { SetProperty(ref _chart1Path, value); }
+        }
+
+        public string Chart2Path
+        {
+            get { return _chart2Path; }
+            set { SetProperty(ref _chart2Path, value); }
+        }
+
+        public string Chart3Path
+        {
+            get { return _chart3Path; }
+            set { SetProperty(ref _chart3Path, value); }
+        }
+
         public ObservableCollection<String> OutputPathList
         {
             get { return _outputPathList; }

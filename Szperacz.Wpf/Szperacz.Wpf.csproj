@@ -14,4 +14,19 @@
     <ProjectReference Include="..\Szperacz.Core\Szperacz.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Src\chart1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Src\chart2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Src\chart3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Src\paths.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
