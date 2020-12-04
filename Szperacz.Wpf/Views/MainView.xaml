@@ -46,17 +46,22 @@
 
         <!-- Column 1, Row 2 -->
         <StackPanel Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Grid.Column="0" MinWidth="60" Margin="0 0 20 0" Height="30"
-                    mvx:Bi.nd="Command FolderCommand"
-                    Content="..."/>
-            <TextBox TextWrapping="Wrap" VerticalAlignment="Center" MinWidth="450" Height="30"
-                     Text="{Binding Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <!--<Button Grid.Column="0" MinWidth="60" Margin="0 0 20 0" Height="30"
+                    mvx:Bi.nd="Command FolderCommand">
+            </Button>-->
+            <cl:ExplorerBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Width="{Binding ElementName=listBoxPaths, Path=ActualWidth}"
+                        
+                        TextInside="{Binding Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <!-- ExItemSource="{Binding CpuThreadList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" -->
         </StackPanel>
 
         <!-- Column 1, Row 3 -->
-        <TextBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" TextWrapping="Wrap" 
-                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="530" Height="30"
-                 Text="{Binding Word, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <cl:ExplorerBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Width="{Binding ElementName=listBoxPaths, Path=ActualWidth}"
+                        TextInside="{Binding Word, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <!-- Column 1, Row 4 -->
         <CheckBox Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Padding="10 -4" Height="30" VerticalContentAlignment="Center"
@@ -64,7 +69,8 @@
                   Content="Wielkość liter ma znaczenie"/>
 
         <!-- Column 2, Row 4 -->
-        <ComboBox Grid.Column="2" Grid.Row="4" MaxWidth="150" MaxHeight="30"/>
+        <ComboBox Grid.Column="2" Grid.Row="4" MaxWidth="150" MaxHeight="30" 
+                  ItemsSource="{Binding CpuThreadList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
         <!-- Column 1, Row 5 -->
         <CheckBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Padding="10 -4" Height="30" VerticalContentAlignment="Center"
@@ -77,7 +83,7 @@
                 Content="Szukaj"/>
         
         <!-- Column 1, Row 7 -->
-        <ListBox Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2"
+        <ListBox x:Name="listBoxPaths" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2"
                  HorizontalContentAlignment="Stretch" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.CanContentScroll="False"
@@ -106,6 +112,5 @@
         <Border Grid.Column="5" Grid.Row="3" Grid.RowSpan="6" Grid.ColumnSpan="2" Padding="15">
             <Image Source="{Binding Chart3Path}"/>
         </Border>
-
     </Grid>
 </views:MvxWpfView>

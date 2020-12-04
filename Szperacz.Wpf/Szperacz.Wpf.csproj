@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="MvvmCross.Platforms.Wpf" Version="7.1.2" />
+    <PackageReference Include="MvvmCross.Plugin.ResourceLoader" Version="7.1.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="img\folder.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Src\chart1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -22,6 +26,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Src\chart3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Src\folder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Src\paths.txt">

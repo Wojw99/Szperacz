@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using MvvmCross;
 using System.Text;
 using System.Windows;
 using Szperacz.Core.Models;
 
 using Ookii.Dialogs.Wpf;
+using MvvmCross.Base;
 
 namespace Szperacz.Core.ViewModels
 {
@@ -20,12 +22,13 @@ namespace Szperacz.Core.ViewModels
         private string _chart2Path = "";
         private string _chart3Path = "";
 
-        private string _path = "";
-        private string _word = "";
+        private string _path = "Ścieżka";
+        private string _word = "Szukana fraza";
         private bool _createChart = false;
         private bool _letterSizeMeans = true;
         private bool _automaticSelection = false;
         private ObservableCollection<String> _outputPathList = new ObservableCollection<String>();
+        private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "232", "323", "467" };
 
         public MainViewModel()
         {
@@ -131,6 +134,15 @@ namespace Szperacz.Core.ViewModels
         #endregion
 
         #region Properties
+        public string FolderImgSource
+        {
+            get 
+            {
+                var uri = new Uri(@"/Src/folder.png", UriKind.Relative);
+                return uri.ToString(); 
+            }
+        }
+
         public string Chart1Path
         {
             get { return _chart1Path; }
@@ -154,6 +166,13 @@ namespace Szperacz.Core.ViewModels
             get { return _outputPathList; }
             set { SetProperty(ref _outputPathList, value); }
         }
+
+        public ObservableCollection<String> CpuThreadList
+        {
+            get { return _cpuThreadList; }
+            set { SetProperty(ref _cpuThreadList, value); }
+        }
+
 
         public bool CreateChart
         {

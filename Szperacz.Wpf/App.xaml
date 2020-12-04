@@ -5,6 +5,5 @@
              xmlns:local="clr-namespace:Szperacz.Wpf"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
     </Application.Resources>
 </views:MvxApplication>

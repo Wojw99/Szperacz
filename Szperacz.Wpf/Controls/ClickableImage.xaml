@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Szperacz.Wpf.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Image x:Name="image" Source="/Src/chart2.jpg" Stretch="Uniform"/>
+             d:DesignHeight="450" d:DesignWidth="800" Name="cImgWindow">
+    <Grid x:Name="back" Background="Red">
+        <Image x:Name="image" Source="{Binding ImagePath, ElementName=cImgWindow}" Stretch="Uniform"/>
+        <TextBlock Text="{Binding ImagePath, ElementName=cImgWindow}" FontSize="33"/>
     </Grid>
 </UserControl>

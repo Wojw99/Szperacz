@@ -18,32 +18,24 @@ namespace Szperacz.Wpf.Controls
     /// </summary>
     public partial class ClickableImage : UserControl
     {
-        #region Properties
-        public string Path
+
+        public object ImagePath
         {
-            get
+            get { return (object)GetValue(ImagePathProperty); }
+            set 
             {
-                return (string)GetValue(TextProperty);
-            }
-            set
-            {
-                SetValue(TextProperty, value);
-                ChangeImage();
+                back.Background = Brushes.Gray;
+                SetValue(ImagePathProperty, value);
             }
         }
 
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Path", typeof(string), typeof(ClickableImage), new PropertyMetadata(""));
-        #endregion
+        // Using a DependencyProperty as the backing store for Source.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ImagePathProperty =
+            DependencyProperty.Register("ImagePath", typeof(object), typeof(ClickableImage), new PropertyMetadata(0));
 
         public ClickableImage()
         {
             InitializeComponent();
-        }
-
-        private void ChangeImage()
-        {
-
         }
     }
 }
