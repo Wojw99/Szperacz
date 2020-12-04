@@ -14,29 +14,40 @@
         </Grid.ColumnDefinitions>
         
         <!-- Column 0 -->
-        <ComboBox x:Name="combo" Grid.Column="0" 
+        <ComboBox x:Name="combo" Grid.Column="0" Padding="40 0"
                   ItemsSource="{Binding ExItemSource, ElementName=ExplorerWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="combo_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" MaxWidth="{Binding ElementName=gridExplorer, Path=ActualWidth}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="15" Height="15" Fill="Gold" Margin="0 0 4 0"/>
+                        <TextBlock Text="{Binding}" MaxWidth="{Binding ElementName=gridExplorer, Path=ActualWidth}"/>
+                    </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
-                    <Setter Property="Cursor" Value="Hand"/>
                     <Setter Property="Margin" Value="0"/>
-                    <Setter Property="Padding" Value="10 0 50 0"/>
+                    <Setter Property="Padding" Value="7 0 40 0"/>
                 </Style>
             </ComboBox.ItemContainerStyle>
         </ComboBox>
         
         <!-- Column 1 -->
-        <TextBox x:Name="textBoxPath" Grid.Column="1" 
-                 
-                 TextWrapping="Wrap" VerticalAlignment="Center" VerticalContentAlignment="Center"
-                 Height="{Binding ElementName=gridExplorer,Path=ActualHeight}"
-                 Text="{Binding TextInside, ElementName=ExplorerWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-        </TextBox>
-        
+        <Border Grid.Column="1">
+            <Grid>
+                <TextBlock x:Name="textBlockWatermark" Background="White" 
+                           VerticalAlignment="Center" Padding="5 6" Foreground="Gray"
+                           Text="{Binding TextWatermark, ElementName=ExplorerWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                
+                <TextBox x:Name="textBoxPath" AutoWordSelection="True" Background="Transparent"
+                         TextWrapping="Wrap" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                         GotFocus="textBoxPath_GotFocus" LostFocus="textBoxPath_LostFocus"
+                         TextChanged="textBoxPath_TextChanged" d:Text="Tekstowo" Padding="3 0"
+                         Height="{Binding ElementName=gridExplorer, Path=ActualHeight}"
+                         Text="{Binding TextInside, ElementName=ExplorerWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                </TextBox>
+            </Grid>
+        </Border>
+                
     </Grid>
 </UserControl>

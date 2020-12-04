@@ -51,16 +51,18 @@
             </Button>-->
             <cl:ExplorerBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" 
                         VerticalAlignment="Center" HorizontalAlignment="Center"
+                        TextWatermark="Ścieżka"
                         Width="{Binding ElementName=listBoxPaths, Path=ActualWidth}"
-                        
+                        ExItemSource="{Binding PathHistoryList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         TextInside="{Binding Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <!-- ExItemSource="{Binding CpuThreadList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" -->
         </StackPanel>
 
         <!-- Column 1, Row 3 -->
         <cl:ExplorerBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" 
                         VerticalAlignment="Center" HorizontalAlignment="Center"
+                        TextWatermark="Szukana fraza"
                         Width="{Binding ElementName=listBoxPaths, Path=ActualWidth}"
+                        ExItemSource="{Binding WordHistoryList}"
                         TextInside="{Binding Word, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <!-- Column 1, Row 4 -->

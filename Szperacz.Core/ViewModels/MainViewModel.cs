@@ -22,13 +22,26 @@ namespace Szperacz.Core.ViewModels
         private string _chart2Path = "";
         private string _chart3Path = "";
 
-        private string _path = "Ścieżka";
-        private string _word = "Szukana fraza";
+        private string _path = "";
+        private string _word = "";
         private bool _createChart = false;
         private bool _letterSizeMeans = true;
         private bool _automaticSelection = false;
+
         private ObservableCollection<String> _outputPathList = new ObservableCollection<String>();
         private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "232", "323", "467" };
+        private ObservableCollection<String> _pathHistoryList = new ObservableCollection<String>() 
+        {
+            @"C:\Program Files (x86)\Microsoft Visual Studio\2019",
+            @"C:\Users\woj19\AppData",
+            @"D:\Users\Obrazy" 
+        };
+        private ObservableCollection<String> _wordHistoryList = new ObservableCollection<String>() 
+        { 
+            "Słowo Roku 2020", 
+            "Papież", 
+            "Lubię Javascript!" 
+        };
 
         public MainViewModel()
         {
@@ -173,6 +186,17 @@ namespace Szperacz.Core.ViewModels
             set { SetProperty(ref _cpuThreadList, value); }
         }
 
+        public ObservableCollection<String> PathHistoryList
+        {
+            get { return _pathHistoryList; }
+            set { SetProperty(ref _pathHistoryList, value); }
+        }
+
+        public ObservableCollection<String> WordHistoryList
+        {
+            get { return _wordHistoryList; }
+            set { SetProperty(ref _wordHistoryList, value); }
+        }
 
         public bool CreateChart
         {

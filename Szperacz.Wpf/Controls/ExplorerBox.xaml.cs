@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Szperacz.Wpf.Controls
 {
@@ -19,6 +11,16 @@ namespace Szperacz.Wpf.Controls
     /// </summary>
     public partial class ExplorerBox : UserControl
     {
+        public object TextWatermark
+        {
+            get { return (object)GetValue(TextWatermarkProperty); }
+            set { SetValue(TextWatermarkProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TextWatermark.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TextWatermarkProperty =
+            DependencyProperty.Register("TextWatermark", typeof(object), typeof(ExplorerBox), new PropertyMetadata(0));
+
         public object TextInside
         {
             get { return (object)GetValue(TextInsideProperty); }
@@ -42,12 +44,34 @@ namespace Szperacz.Wpf.Controls
         public ExplorerBox()
         {
             InitializeComponent();
-            ExItemSource = new ObservableCollection<String>() { "232", "323", "467" };
         }
 
         private void combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TextInside = combo.SelectedItem.ToString();
+        }
+
+        private void textBoxPath_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textBlockWatermark.Visibility = Visibility.Hidden;
+        }
+
+        private void textBoxPath_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(textBoxPath.Text == "")
+                textBlockWatermark.Visibility = Visibility.Visible;
+        }
+
+        private void textBoxPath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (textBoxPath.Text == "")
+            {
+                textBlockWatermark.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                textBlockWatermark.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
