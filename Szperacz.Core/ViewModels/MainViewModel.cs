@@ -28,7 +28,7 @@ namespace Szperacz.Core.ViewModels
         private bool _letterSizeMeans = true;
         private bool _automaticSelection = false;
 
-        private ObservableCollection<String> _outputPathList = new ObservableCollection<String>();
+        private ObservableCollection<PathModel> _outputPathList = new ObservableCollection<PathModel>();
         private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "232", "323", "467" };
         private ObservableCollection<String> _pathHistoryList = new ObservableCollection<String>() 
         {
@@ -123,8 +123,7 @@ namespace Szperacz.Core.ViewModels
 
                 if(wordFound)
                 {
-                    Debug.WriteLine("Debug");
-                    OutputPathList = new ObservableCollection<String>(SearchHandler.GetPaths());
+                    OutputPathList = new ObservableCollection<PathModel>(SearchHandler.GetPaths());
                 }
                 if (CreateChart)
                 {
@@ -141,7 +140,7 @@ namespace Szperacz.Core.ViewModels
             else
             {
                 ClearGraphs();
-                OutputPathList = new ObservableCollection<String>();
+                OutputPathList = new ObservableCollection<PathModel>();
             }
         }
         #endregion
@@ -174,7 +173,7 @@ namespace Szperacz.Core.ViewModels
             set { SetProperty(ref _chart3Path, value); }
         }
 
-        public ObservableCollection<String> OutputPathList
+        public ObservableCollection<PathModel> OutputPathList
         {
             get { return _outputPathList; }
             set { SetProperty(ref _outputPathList, value); }

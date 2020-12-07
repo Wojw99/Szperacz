@@ -28,6 +28,9 @@
     <None Update="Src\chart3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Src\connector.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Src\folder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
