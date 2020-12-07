@@ -1,0 +1,6 @@
+C:\Users\Jakub Si³ka\Desktop\IO\lokacja\tekst — kopia.txt; 3; []
+C:\Users\Jakub Si³ka\Desktop\IO\lokacja\tekst.txt; 2; []
+C:\Users\Jakub Si³ka\Desktop\IO\lokacja\doc.docx; 3; [s³owo, S³owo, _s³owo]
+C:\Users\Jakub Si³ka\Desktop\IO\lokacja\pdf.pdf; 1; []
+
+# œcie¿ka; liczba wyrazów; pasuj¹ce do wyra¿enia (je¿eli jest)

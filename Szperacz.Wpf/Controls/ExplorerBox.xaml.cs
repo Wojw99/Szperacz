@@ -48,7 +48,10 @@ namespace Szperacz.Wpf.Controls
 
         private void combo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TextInside = combo.SelectedItem.ToString();
+            if(combo.SelectedIndex > -1)
+            {
+                TextInside = combo.SelectedItem.ToString();
+            }
         }
 
         private void textBoxPath_GotFocus(object sender, RoutedEventArgs e)
@@ -72,6 +75,8 @@ namespace Szperacz.Wpf.Controls
             {
                 textBlockWatermark.Visibility = Visibility.Hidden;
             }
+
+            combo.SelectedIndex = -1;
         }
     }
 }

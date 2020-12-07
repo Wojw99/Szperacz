@@ -1,0 +1,5 @@
+pies # słowo
+C:\Users\Jakub Siłka\Desktop\IO\lokacja # ścieżka
+1 # wielkość liter ma znaczenie
+4 # ilość wątków
+0 # czy słowo to wyrażenie reg.
