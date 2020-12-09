@@ -7,17 +7,27 @@ using Szperacz.Core.Models;
 
 namespace Szperacz.Core
 {
+    /// <summary>
+    /// Contains methods to operate with the python script to search files.
+    /// </summary>
     public static class SearchHandler
     {
-        private static readonly string pathListPath = "Src/connector.txt";
+        private static readonly string pathListPath = "Src/paths.txt";
         private static readonly string[] chartPaths = new string[] { };
 
-        // D:\Development\GitHub\Szperacz\Szperacz.Core\Src\paths.txt
+        /// <summary>
+        /// Gives arguments to the python script and turn on it.
+        /// </summary>
+        /// <returns></returns>
         public static bool SearchWord(string word, string path, bool createChart, bool letterSizeMeans, bool automaticSelection)
         {
             return true;
         }
 
+        /// <summary>
+        /// Reads paths searched by the python script.
+        /// </summary>
+        /// <returns>List of PathModel</returns>
         public static List<PathModel> GetPaths()
         {
             string text = "";
@@ -41,6 +51,10 @@ namespace Szperacz.Core
             return list;
         }
 
+        /// <summary>
+        /// Reads paths to images created by the python script.
+        /// </summary>
+        /// <returns>List of strings which contains filenames.</returns>
         public static List<String> GetChartPaths()
         {
             return new List<string>() {

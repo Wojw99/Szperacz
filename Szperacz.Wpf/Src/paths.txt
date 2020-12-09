@@ -1,3 +1,4 @@
-D:\GitHub\Szperacz\kartkapapieru.paper
-C:\KomputerMój\Zdjęcia\memzwitułą.txt
-E:\NatymDyskuNicNiema\ZakazWstępu\śmiesznyKot.pdf
+C:\Users\Jakub Siłka\Desktop\IO\lokacja\tekst — kopia.txt; 3; []
+C:\Users\Jakub Siłka\Desktop\IO\lokacja\tekst.txt; 2; []
+C:\Users\Jakub Siłka\Desktop\IO\lokacja\doc.docx; 3; [słowo, Słowo, _słowo]
+C:\Users\Jakub Siłka\Desktop\IO\lokacja\pdf.pdf; 1; []

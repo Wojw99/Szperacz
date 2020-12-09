@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using MvvmCross;
 using System.Text;
+using System.Linq;
 using System.Windows;
 using Szperacz.Core.Models;
 
@@ -30,18 +31,11 @@ namespace Szperacz.Core.ViewModels
 
         private ObservableCollection<PathModel> _outputPathList = new ObservableCollection<PathModel>();
         private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "232", "323", "467" };
-        private ObservableCollection<String> _pathHistoryList = new ObservableCollection<String>() 
-        {
-            @"C:\Program Files (x86)\Microsoft Visual Studio\2019",
-            @"C:\Users\woj19\AppData",
-            @"D:\Users\Obrazy" 
-        };
-        private ObservableCollection<String> _wordHistoryList = new ObservableCollection<String>() 
-        { 
-            "Słowo Roku 2020", 
-            "Papież", 
-            "Lubię Javascript!" 
-        };
+
+        private readonly ObservableCollection<SearchModel> historyList 
+            = new ObservableCollection<SearchModel>(HistoryHandler.DeserializeHistoryList());
+        private ObservableCollection<string> _pathHistoryList = new ObservableCollection<string>();
+        private ObservableCollection<string> _phraseHistoryList = new ObservableCollection<string>();
 
         public MainViewModel()
         {
@@ -49,9 +43,23 @@ namespace Szperacz.Core.ViewModels
             FolderCommand = new MvxCommand(SelectFolder);
             ShowGraph1Command = new MvxCommand(ShowGraph1);
             ShowGraph2Command = new MvxCommand(ShowGraph2);
+
+            PathHistoryList = new ObservableCollection<string>(historyList.Select(m => m.FolderPath).Reverse());
+            PhraseHistoryList = new ObservableCollection<string>(historyList.Select(m => m.Phrase).Reverse());
         }
 
         #region Helper Methods
+        /// <summary>
+        /// Add a new object to the history and refreshes view.
+        /// </summary>
+        private void AddToHistory(string phrase, string path)
+        {
+            historyList.Add(new SearchModel(phrase, path));
+            PathHistoryList = new ObservableCollection<string>(historyList.Select(m => m.FolderPath).Reverse());
+            PhraseHistoryList = new ObservableCollection<string>(historyList.Select(m => m.Phrase).Reverse());
+            HistoryHandler.SerializeHistoryList(historyList.ToList());
+        }
+
         private bool IsCorrectPath(string path)
         {
             var drives = DriveInfo.GetDrives();
@@ -77,6 +85,9 @@ namespace Szperacz.Core.ViewModels
         public IMvxCommand ShowGraph1Command { get; set; }
         public IMvxCommand ShowGraph2Command { get; set; }
 
+        /// <summary>
+        /// Change the main graph to Graph1
+        /// </summary>
         public void ShowGraph1()
         {
             var chart1PathAlias = Chart1Path;
@@ -86,6 +97,9 @@ namespace Szperacz.Core.ViewModels
             Chart1Path = chart3PathAlias;
         }
 
+        /// <summary>
+        /// Change the main graph to Graph2
+        /// </summary>
         public void ShowGraph2()
         {
             var chart2PathAlias = Chart2Path;
@@ -120,8 +134,9 @@ namespace Szperacz.Core.ViewModels
             if (IsCorrectPath(Path) && Word.Length > 0)
             {
                 var wordFound = SearchHandler.SearchWord(Word, Path, CreateChart, LetterSizeMeans, AutomaticSelection);
+                AddToHistory(Word, Path);
 
-                if(wordFound)
+                if (wordFound)
                 {
                     OutputPathList = new ObservableCollection<PathModel>(SearchHandler.GetPaths());
                 }
@@ -191,10 +206,10 @@ namespace Szperacz.Core.ViewModels
             set { SetProperty(ref _pathHistoryList, value); }
         }
 
-        public ObservableCollection<String> WordHistoryList
+        public ObservableCollection<String> PhraseHistoryList
         {
-            get { return _wordHistoryList; }
-            set { SetProperty(ref _wordHistoryList, value); }
+            get { return _phraseHistoryList; }
+            set { SetProperty(ref _phraseHistoryList, value); }
         }
 
         public bool CreateChart

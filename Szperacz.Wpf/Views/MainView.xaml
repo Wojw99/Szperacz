@@ -62,7 +62,7 @@
                         VerticalAlignment="Center" HorizontalAlignment="Center"
                         TextWatermark="Szukana fraza"
                         Width="{Binding ElementName=listBoxPaths, Path=ActualWidth}"
-                        ExItemSource="{Binding WordHistoryList}"
+                        ExItemSource="{Binding PhraseHistoryList}"
                         TextInside="{Binding Word, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <!-- Column 1, Row 4 -->
