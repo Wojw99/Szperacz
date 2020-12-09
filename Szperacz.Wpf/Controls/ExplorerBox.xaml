@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ic="clr-namespace:Szperacz.Wpf.Icons"   
              xmlns:local="clr-namespace:Szperacz.Wpf.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="400"
@@ -19,7 +20,7 @@
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Ellipse Width="15" Height="15" Fill="Gold" Margin="0 0 4 0"/>
+                        <ic:PhraseIcon Margin="0 0 5 0"/>
                         <TextBlock Text="{Binding}" MaxWidth="{Binding ElementName=gridExplorer, Path=ActualWidth}"/>
                     </StackPanel>
                 </DataTemplate>
@@ -27,7 +28,7 @@
             <ComboBox.ItemContainerStyle>
                 <Style TargetType="ComboBoxItem">
                     <Setter Property="Margin" Value="0"/>
-                    <Setter Property="Padding" Value="7 0 40 0"/>
+                    <Setter Property="Padding" Value="5 0 40 0"/>
                 </Style>
             </ComboBox.ItemContainerStyle>
         </ComboBox>
@@ -35,10 +36,13 @@
         <!-- Column 1 -->
         <Border Grid.Column="1">
             <Grid>
-                <TextBlock x:Name="textBlockWatermark" Background="White" 
+                <Border Background="White"/>
+
+                <!-- Watermark -->
+                <TextBlock x:Name="textBlockWatermark" Background="Transparent" 
                            VerticalAlignment="Center" Padding="5 6" Foreground="Gray"
                            Text="{Binding TextWatermark, ElementName=ExplorerWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                
+                <!-- User text -->
                 <TextBox x:Name="textBoxPath" AutoWordSelection="True" Background="Transparent"
                          TextWrapping="Wrap" VerticalAlignment="Center" VerticalContentAlignment="Center"
                          GotFocus="textBoxPath_GotFocus" LostFocus="textBoxPath_LostFocus"

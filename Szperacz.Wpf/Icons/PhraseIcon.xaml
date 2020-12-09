@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="Szperacz.Wpf.Icons.PhraseIcon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Szperacz.Wpf.Icons"
+             mc:Ignorable="d">
+    <Grid>
+        <Ellipse Width="18" Height="18" Fill="CornflowerBlue"/>
+        <TextBlock FontFamily="Consolas" Foreground="DarkBlue" 
+                   FontWeight="ExtraBold" Text="W" FontSize="13" 
+                   Height="15" TextAlignment="Center"/>
+    </Grid>
+</UserControl>

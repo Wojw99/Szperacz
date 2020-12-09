@@ -8,7 +8,7 @@
              xmlns:cl="clr-namespace:Szperacz.Wpf.Controls"   
              xmlns:local="clr-namespace:Szperacz.Wpf.Views"
              mc:Ignorable="d"
-             d:Height="720" d:Width="1280" FontSize="16" Background="White">
+             d:Height="720" d:Width="1280" FontSize="16" Background="AliceBlue">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/> 

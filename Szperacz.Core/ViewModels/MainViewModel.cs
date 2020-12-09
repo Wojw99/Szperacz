@@ -202,13 +202,13 @@ namespace Szperacz.Core.ViewModels
 
         public ObservableCollection<String> PathHistoryList
         {
-            get { return _pathHistoryList; }
+            get { return new ObservableCollection<String>(_pathHistoryList.Distinct()); }
             set { SetProperty(ref _pathHistoryList, value); }
         }
 
         public ObservableCollection<String> PhraseHistoryList
         {
-            get { return _phraseHistoryList; }
+            get { return new ObservableCollection<String>(_phraseHistoryList.Distinct()); }
             set { SetProperty(ref _phraseHistoryList, value); }
         }
 

@@ -52,9 +52,7 @@ namespace Szperacz.Wpf.Controls
 
         public object ButtonClick
         {
-            get {
-                Debug.WriteLine(" I AM HERE !!!!!!!!");
-                return (object)GetValue(ButtonClickProperty); }
+            get { return (object)GetValue(ButtonClickProperty); }
             set { SetValue(ButtonClickProperty, value); }
         }
 
