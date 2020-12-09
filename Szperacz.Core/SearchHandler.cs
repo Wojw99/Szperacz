@@ -35,7 +35,6 @@ namespace Szperacz.Core
             using (StreamReader r = new StreamReader(pathListPath, Encoding.UTF8))
             {
                 text = r.ReadToEnd();
-                Debug.WriteLine(text);
             }
 
             var lines = text.Split('\n');
