@@ -11,7 +11,6 @@ using System.Text;
 using System.Linq;
 using System.Windows;
 using Szperacz.Core.Models;
-
 using Ookii.Dialogs.Wpf;
 using MvvmCross.Base;
 
@@ -118,7 +117,6 @@ namespace Szperacz.Core.ViewModels
         public void SelectFolder()
         {
             var browser = new VistaFolderBrowserDialog();
-
             browser.ShowDialog();
             Path = browser.SelectedPath;
         }
