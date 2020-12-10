@@ -47,7 +47,7 @@ namespace Szperacz.Wpf {
         /// InitializeComponent
         /// </summary>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "5.0.0.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "5.0.1.0")]
         public void InitializeComponent() {
             
             #line 6 "..\..\..\App.xaml"
@@ -62,7 +62,7 @@ namespace Szperacz.Wpf {
         /// </summary>
         [System.STAThreadAttribute()]
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "5.0.0.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "5.0.1.0")]
         public static void Main() {
             Szperacz.Wpf.App app = new Szperacz.Wpf.App();
             app.InitializeComponent();

@@ -13,6 +13,7 @@ using System.Linq;
 using Szperacz.Core.Models;
 using Ookii.Dialogs.Wpf;
 using MvvmCross.Base;
+using System.Timers;
 
 namespace Szperacz.Core.ViewModels
 {
@@ -28,8 +29,9 @@ namespace Szperacz.Core.ViewModels
         private bool _letterSizeMeans = true;
         private bool _automaticSelection = false;
 
-        private bool _messageBoxVisibility = false;
+        private double _messageBoxVisibility = 0;
         private string _messageBoxText = "Nieprawidłowa wartość!";
+        private readonly Timer timer = new Timer(2000);
 
         private ObservableCollection<PathModel> _outputPathList = new ObservableCollection<PathModel>();
         private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "232", "323", "467" };
@@ -80,6 +82,29 @@ namespace Szperacz.Core.ViewModels
             Chart1Path = "";
             Chart2Path = "";
             Chart3Path = "";
+        }
+
+        /// <summary>
+        /// Show a warning to the user and count down a timer.
+        /// </summary>
+        /// <param name="text">Message to the user</param>
+        /// <param name="interval">Time of the waring</param>
+        private void ShowWarning(string text, double interval = 2000)
+        {
+            MessageBoxText = text;
+            MessageBoxVisibility = 35;
+            timer.Elapsed += timerElapsed;
+            timer.Interval = interval;
+            timer.Start();
+        }
+
+        /// <summary>
+        /// Occurs when the timer elapsed.
+        /// </summary>
+        private void timerElapsed(object sender, ElapsedEventArgs e)
+        {
+            MessageBoxVisibility = 0;
+            timer.Stop();
         }
         #endregion
 
@@ -157,13 +182,15 @@ namespace Szperacz.Core.ViewModels
                 {
                     ClearGraphs();
                     OutputPathList = new ObservableCollection<PathModel>();
-                    //MessageBox
+                    ShowWarning("Nie znaleziono szukanej frazy w podanej ścieżce!", 3000);
                 }
             }
-            else
+            else 
             {
                 ClearGraphs();
                 OutputPathList = new ObservableCollection<PathModel>();
+                if (!IsCorrectPath(Path)) ShowWarning("Ścieżka nieprawidłowa!");
+                else ShowWarning("Brak podanej frazy!");
             }
         }
         #endregion
@@ -175,7 +202,7 @@ namespace Szperacz.Core.ViewModels
             set { SetProperty(ref _messageBoxText, value); }
         }
 
-        public Visibility MessageBoxVisibility
+        public double MessageBoxVisibility
         {
             get { return _messageBoxVisibility; }
             set { SetProperty(ref _messageBoxVisibility, value); }
