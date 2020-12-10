@@ -8,7 +8,7 @@
              xmlns:cl="clr-namespace:Szperacz.Wpf.Controls"   
              xmlns:local="clr-namespace:Szperacz.Wpf.Views"
              mc:Ignorable="d"
-             d:Height="720" d:Width="1280" FontSize="16" Background="AliceBlue">
+             d:Height="720" d:Width="1280" FontSize="16" Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/> 
@@ -53,7 +53,7 @@
                               TextInside="{Binding Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <!-- Column 1, Row 3 -->
-        <cl:ExplorerBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" 
+        <cl:ExplorerBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"
                         VerticalAlignment="Center" HorizontalAlignment="Center"
                         TextWatermark="Szukana fraza"
                         Width="{Binding ElementName=listBoxPaths, Path=ActualWidth}"
@@ -84,7 +84,14 @@
                  HorizontalContentAlignment="Stretch" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.CanContentScroll="False"
-                 ItemsSource="{Binding OutputPathList, UpdateSourceTrigger=PropertyChanged}"/>
+                 ItemsSource="{Binding OutputPathList, UpdateSourceTrigger=PropertyChanged}">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <cl:SearchResultControl PathResult="{Binding PhraseAmount}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
         <!-- Column 1, Row 8 -->
         <CheckBox Grid.Column="1" Grid.Row="8" VerticalAlignment="Center" Padding="10 -4" Height="30" VerticalContentAlignment="Center"
