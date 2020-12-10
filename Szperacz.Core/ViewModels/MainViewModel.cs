@@ -8,8 +8,8 @@ using System.Diagnostics;
 using System.IO;
 using MvvmCross;
 using System.Text;
-using System.Linq;
 using System.Windows;
+using System.Linq;
 using Szperacz.Core.Models;
 using Ookii.Dialogs.Wpf;
 using MvvmCross.Base;
@@ -27,6 +27,9 @@ namespace Szperacz.Core.ViewModels
         private bool _createChart = false;
         private bool _letterSizeMeans = true;
         private bool _automaticSelection = false;
+
+        private bool _messageBoxVisibility = false;
+        private string _messageBoxText = "Nieprawidłowa wartość!";
 
         private ObservableCollection<PathModel> _outputPathList = new ObservableCollection<PathModel>();
         private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "232", "323", "467" };
@@ -137,17 +140,24 @@ namespace Szperacz.Core.ViewModels
                 if (wordFound)
                 {
                     OutputPathList = new ObservableCollection<PathModel>(SearchHandler.GetPaths());
-                }
-                if (CreateChart)
-                {
-                    var graphPaths = SearchHandler.GetChartPaths();
-                    Chart1Path = graphPaths[0];
-                    Chart2Path = graphPaths[1];
-                    Chart3Path = graphPaths[2];
+
+                    if (CreateChart)
+                    {
+                        var graphPaths = SearchHandler.GetChartPaths();
+                        Chart1Path = graphPaths[0];
+                        Chart2Path = graphPaths[1];
+                        Chart3Path = graphPaths[2];
+                    }
+                    else
+                    {
+                        ClearGraphs();
+                    }
                 }
                 else
                 {
                     ClearGraphs();
+                    OutputPathList = new ObservableCollection<PathModel>();
+                    //MessageBox
                 }
             }
             else
@@ -159,13 +169,16 @@ namespace Szperacz.Core.ViewModels
         #endregion
 
         #region Properties
-        public string FolderImgSource
+        public string MessageBoxText
         {
-            get 
-            {
-                var uri = new Uri(@"/Src/folder.png", UriKind.Relative);
-                return uri.ToString(); 
-            }
+            get { return _messageBoxText; }
+            set { SetProperty(ref _messageBoxText, value); }
+        }
+
+        public Visibility MessageBoxVisibility
+        {
+            get { return _messageBoxVisibility; }
+            set { SetProperty(ref _messageBoxVisibility, value); }
         }
 
         public string Chart1Path
