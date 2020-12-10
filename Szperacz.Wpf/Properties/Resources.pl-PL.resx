@@ -118,36 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppName" xml:space="preserve">
-    <value>Searcher</value>
+    <value>Szperacz</value>
   </data>
   <data name="ButtonSearch" xml:space="preserve">
-    <value>Search</value>
+    <value>Szukaj</value>
   </data>
   <data name="CheckBoxAutoSelection" xml:space="preserve">
-    <value>Automatic selection</value>
+    <value>Automatyczne zaznaczanie</value>
   </data>
   <data name="CheckBoxCreateGraphs" xml:space="preserve">
-    <value>Create graphs</value>
+    <value>Utwórz wykres</value>
   </data>
   <data name="CheckBoxLetterSize" xml:space="preserve">
-    <value>Letter size means</value>
+    <value>Wielkość liter ma znaczenie</value>
   </data>
   <data name="OpenButton" xml:space="preserve">
-    <value>Open</value>
+    <value>Otwórz</value>
   </data>
   <data name="WarningNotFound" xml:space="preserve">
-    <value>The search phrase was not found in the given path!</value>
+    <value>Nie znaleziono szukanej frazy w podanej ścieżce!</value>
   </data>
   <data name="WarningPathIncorrect" xml:space="preserve">
-    <value>The given path is incorrect!</value>
+    <value>Ścieżka nieprawidłowa!</value>
   </data>
   <data name="WarningPhraseIncorrect" xml:space="preserve">
-    <value>There is no given phrase!</value>
+    <value>Brak podanej frazy!</value>
   </data>
   <data name="WatermarkPath" xml:space="preserve">
-    <value>Folder path</value>
+    <value>Ścieżka folderu</value>
   </data>
   <data name="WatermarkPhrase" xml:space="preserve">
-    <value>Searched phrase</value>
+    <value>Fraza do wyszukania</value>
   </data>
 </root>

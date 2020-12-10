@@ -10,10 +10,4 @@
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="MvvmCheatSheat\ExampleView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-  </ItemGroup>
-
 </Project>

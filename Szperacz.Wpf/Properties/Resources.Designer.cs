@@ -61,11 +61,101 @@ namespace Szperacz.Wpf.Properties {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Szperacz.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Searcher.
         /// </summary>
         public static string AppName {
             get {
                 return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Search.
+        /// </summary>
+        public static string ButtonSearch {
+            get {
+                return ResourceManager.GetString("ButtonSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Automatic selection.
+        /// </summary>
+        public static string CheckBoxAutoSelection {
+            get {
+                return ResourceManager.GetString("CheckBoxAutoSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Create graphs.
+        /// </summary>
+        public static string CheckBoxCreateGraphs {
+            get {
+                return ResourceManager.GetString("CheckBoxCreateGraphs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Letter size means.
+        /// </summary>
+        public static string CheckBoxLetterSize {
+            get {
+                return ResourceManager.GetString("CheckBoxLetterSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Open.
+        /// </summary>
+        public static string OpenButton {
+            get {
+                return ResourceManager.GetString("OpenButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu The search phrase was not found in the given path!.
+        /// </summary>
+        public static string WarningNotFound {
+            get {
+                return ResourceManager.GetString("WarningNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu The given path is incorrect!.
+        /// </summary>
+        public static string WarningPathIncorrect {
+            get {
+                return ResourceManager.GetString("WarningPathIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu There is no given phrase!.
+        /// </summary>
+        public static string WarningPhraseIncorrect {
+            get {
+                return ResourceManager.GetString("WarningPhraseIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Folder path.
+        /// </summary>
+        public static string WatermarkPath {
+            get {
+                return ResourceManager.GetString("WatermarkPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Searched phrase.
+        /// </summary>
+        public static string WatermarkPhrase {
+            get {
+                return ResourceManager.GetString("WatermarkPhrase", resourceCulture);
             }
         }
     }

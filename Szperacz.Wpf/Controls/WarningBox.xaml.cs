@@ -1,5 +1,4 @@
-﻿using MvvmCross.Platforms.Wpf.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -12,14 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Szperacz.Wpf.Views
+namespace Szperacz.Wpf.Controls
 {
     /// <summary>
-    /// Logika interakcji dla klasy MainView.xaml
+    /// Logika interakcji dla klasy WarningBox.xaml
     /// </summary>
-    public partial class MainView : MvxWpfView
+    public partial class WarningBox : UserControl
     {
-        public MainView()
+        public WarningBox()
         {
             InitializeComponent();
         }

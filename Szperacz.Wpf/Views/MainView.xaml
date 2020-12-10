@@ -83,6 +83,7 @@
         <ListBox x:Name="listBoxPaths" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2"
                  HorizontalContentAlignment="Stretch" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
                  ScrollViewer.CanContentScroll="False"
                  ItemsSource="{Binding OutputPathList, UpdateSourceTrigger=PropertyChanged}">
 

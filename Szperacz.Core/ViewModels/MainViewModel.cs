@@ -1,18 +1,12 @@
 ﻿using MvvmCross.Commands;
-using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
-using MvvmCross;
-using System.Text;
-using System.Windows;
 using System.Linq;
 using Szperacz.Core.Models;
 using Ookii.Dialogs.Wpf;
-using MvvmCross.Base;
 using System.Timers;
 
 namespace Szperacz.Core.ViewModels
@@ -36,8 +30,7 @@ namespace Szperacz.Core.ViewModels
         private ObservableCollection<PathModel> _outputPathList = new ObservableCollection<PathModel>();
         private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "232", "323", "467" };
 
-        private readonly ObservableCollection<SearchModel> historyList 
-            = new ObservableCollection<SearchModel>(HistoryHandler.DeserializeHistoryList());
+        private readonly ObservableCollection<SearchModel> historyList = new ObservableCollection<SearchModel>(HistoryHandler.DeserializeHistoryList());
         private ObservableCollection<string> _pathHistoryList = new ObservableCollection<string>();
         private ObservableCollection<string> _phraseHistoryList = new ObservableCollection<string>();
 
