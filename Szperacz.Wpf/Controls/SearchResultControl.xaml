@@ -11,11 +11,14 @@
     <Grid x:Name="GridResultControl">
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="450"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock x:Name="TextBlockPath" Grid.Column="1" d:Text="Tekstowo" VerticalAlignment="Center" Text="{Binding PathResult, ElementName=SearchResultWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-
+        <TextBlock x:Name="TextBlockPhraseAmount" Grid.Column="2" VerticalAlignment="Center" d:Text="Liczbowo" Text="{Binding PhraseAmountResult, ElementName=SearchResultWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock x:Name="TextBlockMatchPhrase" Grid.Column="3" VerticalAlignment="Center" d:Text="Tekstowo" Text="{Binding MatchPhraseResult,ElementName=SearchResultWindow,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Width="250" Margin="10,0,0,0"/>
         <Button x:Name="OpeningFile" Content="Otwórz" FontSize="15" Grid.Column="0" MaxHeight="30"
                     mvx:Bi.nd="{Binding ButtonOpenClick, ElementName=SearchResultWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,10,0"/>
     </Grid>

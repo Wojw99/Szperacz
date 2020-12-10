@@ -41,5 +41,25 @@ namespace Szperacz.Wpf.Controls
 
         public static readonly DependencyProperty ButtonOpenClickProperty =
             DependencyProperty.Register("ButtonOpenClick", typeof(object), typeof(SearchResultControl), new PropertyMetadata(0));
+
+        public object PhraseAmountResult
+        {
+            get { return (object)GetValue(PhraseAmountResultProperty); }
+            set { SetValue(PhraseAmountResultProperty, value); }
+        }
+
+
+        public static readonly DependencyProperty PhraseAmountResultProperty =
+            DependencyProperty.Register("PhraseAmountResult", typeof(object), typeof(SearchResultControl), new PropertyMetadata(0));
+
+        public object MatchPhraseResult
+        {
+            get { return (object)GetValue(MatchPhraseResultProperty); }
+            set { SetValue(MatchPhraseResultProperty, value); }
+        }
+
+
+        public static readonly DependencyProperty MatchPhraseResultProperty =
+            DependencyProperty.Register("MatchPhraseResult", typeof(object), typeof(SearchResultControl), new PropertyMetadata(0));
     }
 }

@@ -1,0 +1,124 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Szperacz.Wpf/1.0.0": {
+        "dependencies": {
+          "MvvmCross.Platforms.Wpf": "7.1.2",
+          "MvvmCross.Plugin.ResourceLoader": "7.1.2",
+          "Szperacz.Core": "1.0.0"
+        },
+        "runtime": {
+          "Szperacz.Wpf.dll": {}
+        }
+      },
+      "MvvmCross/7.1.2": {
+        "runtime": {
+          "lib/netcoreapp3.1/MvvmCross.dll": {
+            "assemblyVersion": "7.1.2.0",
+            "fileVersion": "7.1.2.0"
+          }
+        }
+      },
+      "MvvmCross.Platforms.Wpf/7.1.2": {
+        "dependencies": {
+          "MvvmCross": "7.1.2"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/MvvmCross.Platforms.Wpf.dll": {
+            "assemblyVersion": "7.1.2.0",
+            "fileVersion": "7.1.2.0"
+          }
+        }
+      },
+      "MvvmCross.Plugin.ResourceLoader/7.1.2": {
+        "dependencies": {
+          "MvvmCross": "7.1.2"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/MvvmCross.Plugin.ResourceLoader.dll": {
+            "assemblyVersion": "7.1.2.0",
+            "fileVersion": "7.1.2.0"
+          }
+        }
+      },
+      "Newtonsoft.Json/12.0.3": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.3.23909"
+          }
+        }
+      },
+      "Ookii.Dialogs.Wpf/3.0.1": {
+        "runtime": {
+          "lib/netcoreapp3.1/Ookii.Dialogs.Wpf.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.1.0"
+          }
+        }
+      },
+      "Szperacz.Core/1.0.0": {
+        "dependencies": {
+          "MvvmCross": "7.1.2",
+          "Newtonsoft.Json": "12.0.3",
+          "Ookii.Dialogs.Wpf": "3.0.1"
+        },
+        "runtime": {
+          "Szperacz.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Szperacz.Wpf/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MvvmCross/7.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1tYkYslR8c7Dp/3itlx8+djBp+cim/ieS1Xp+d/waL0Yrl3H4HGmqxSm89yz/Ts+H9pmrS5DeKpOb+HUOzaERQ==",
+      "path": "mvvmcross/7.1.2",
+      "hashPath": "mvvmcross.7.1.2.nupkg.sha512"
+    },
+    "MvvmCross.Platforms.Wpf/7.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Bua4RosymWv27EUT7ZD2ixrNeuYQmbqdomhWlpqa4Vop1XjS3XFzop1yv00Z37vroT1YA7VHxbFZEtoDOzv/fg==",
+      "path": "mvvmcross.platforms.wpf/7.1.2",
+      "hashPath": "mvvmcross.platforms.wpf.7.1.2.nupkg.sha512"
+    },
+    "MvvmCross.Plugin.ResourceLoader/7.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IjRin3k8jEwfcoBNlgAb+O1rMJU84ArmcfnfvkVT99IjjplJ8cWEpYWnbmRAz4gaKx4xezzedHPUUk9P/Zp4QQ==",
+      "path": "mvvmcross.plugin.resourceloader/7.1.2",
+      "hashPath": "mvvmcross.plugin.resourceloader.7.1.2.nupkg.sha512"
+    },
+    "Newtonsoft.Json/12.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "path": "newtonsoft.json/12.0.3",
+      "hashPath": "newtonsoft.json.12.0.3.nupkg.sha512"
+    },
+    "Ookii.Dialogs.Wpf/3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-C3F1P+5XZVG4o5hB7JS1rZLalpCoGNv2FHAnN4UUJitYv0cD8xdy+eCouTfaZeCNTR/WUfip36e0Y4RDqKXBow==",
+      "path": "ookii.dialogs.wpf/3.0.1",
+      "hashPath": "ookii.dialogs.wpf.3.0.1.nupkg.sha512"
+    },
+    "Szperacz.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
