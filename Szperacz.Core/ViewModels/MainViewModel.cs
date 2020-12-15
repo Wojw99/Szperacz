@@ -28,7 +28,7 @@ namespace Szperacz.Core.ViewModels
         private readonly Timer timer = new Timer(2000);
 
         private ObservableCollection<PathModel> _outputPathList = new ObservableCollection<PathModel>();
-        private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "232", "323", "467" };
+        private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "1", "2", "3", "4", "5", "10", "20", "30", "50" };
 
         private readonly ObservableCollection<SearchModel> historyList = new ObservableCollection<SearchModel>(HistoryHandler.DeserializeHistoryList());
         private ObservableCollection<string> _pathHistoryList = new ObservableCollection<string>();

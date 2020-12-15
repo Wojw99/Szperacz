@@ -8,9 +8,9 @@ namespace Szperacz.Core.Models
     {
         public string Path { get; set; }
         public int PhraseAmount { get; set; }
-        public string MatchingPhrases { get; set; }
+        public List<String> MatchingPhrases { get; set; }
 
-        public PathModel(string path, int phraseAmount, string matchingPhrases)
+        public PathModel(string path, int phraseAmount, List<String> matchingPhrases)
         {
             Path = path;
             PhraseAmount = phraseAmount;

@@ -42,12 +42,25 @@ namespace Szperacz.Core
 
             foreach (var l in lines)
             {
-                var elems = l.Replace(" ", "").Split(';');
-                var model = new PathModel(elems[0], int.Parse(elems[1]), elems[2]);
+                var elems = l.Split(';');
+                var model = new PathModel(elems[0], int.Parse(elems[1]), PhrasesMaker(elems[2]));
                 list.Add(model);
             }
 
             return list;
+        }
+
+        private static List<String> PhrasesMaker(string text)
+        {
+            var formatedText = text.Replace('[', ' ').Replace(']', ' ').Trim();
+            var array = formatedText.Split(',');
+
+            if (array.Length > 0)
+            {
+                return new List<string>(array);
+            }
+
+            return new List<string>();
         }
 
         /// <summary>

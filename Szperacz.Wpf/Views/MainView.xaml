@@ -8,7 +8,7 @@
              xmlns:cl="clr-namespace:Szperacz.Wpf.Controls"   
              xmlns:local="clr-namespace:Szperacz.Wpf.Views"
              mc:Ignorable="d"
-             d:Height="720" d:Width="1280" FontSize="16" Background="White" FontFamily="Bahnschrift">
+             d:Height="720" d:Width="1280" FontSize="16" Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/> 
@@ -40,8 +40,8 @@
         
         <!-- Column 1, Row 1 -->
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
-            <Button Content="PL" MaxHeight="30" Padding="15 0"/>
-            <Button Content="EN" MaxHeight="30" Padding="15 0"/>
+            <!--<Button Content="PL" MaxHeight="30" Padding="15 0"/>
+            <Button Content="EN" MaxHeight="30" Padding="15 0"/>-->
         </StackPanel>
 
         <!-- Column 1, Row 2 -->
@@ -66,7 +66,8 @@
                   Content="Wielkość liter ma znaczenie"/>
 
         <!-- Column 2, Row 4 -->
-        <ComboBox Grid.Column="2" Grid.Row="4" MaxWidth="150" MaxHeight="30" 
+        <ComboBox Grid.Column="2" Grid.Row="4" MaxWidth="150" MaxHeight="30" ToolTip="Liczba wątków" HorizontalAlignment="Right"
+                  MinWidth="95"
                   ItemsSource="{Binding CpuThreadList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
         <!-- Column 1, Row 5 -->
@@ -91,7 +92,7 @@
                 <DataTemplate>
                     <cl:SearchResultControl PathResult="{Binding Path}" 
                                             PhraseAmountResult="{Binding PhraseAmount}" 
-                                            MatchPhraseResult="{Binding MatchingPhrases}"/>
+                                            ComboItems="{Binding MatchingPhrases}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -125,7 +126,7 @@
                 VerticalAlignment="Center" Opacity="0.9" 
                 Height="{Binding MessageBoxVisibility}"
                 BorderBrush="Gray" BorderThickness="1" Background="LightGoldenrodYellow">
-            <TextBlock Text="{Binding MessageBoxText}" TextAlignment="Center" FontSize="20" FontWeight="Bold" Padding="5"/>
+            <TextBlock Text="{Binding MessageBoxText}" TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5"/>
         </Border>
     </Grid>
 </views:MvxWpfView>

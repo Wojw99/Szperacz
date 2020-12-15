@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Szperacz.Wpf.Controls
 {
@@ -23,13 +25,57 @@ namespace Szperacz.Wpf.Controls
             InitializeComponent();
         }
 
+        private void OpeningFile_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var startInfo = new ProcessStartInfo();
+                //startInfo.FileName = "D:\\Users\\Pulpit\\BSI\\Zadanie domowe nr 1.pdf";
+                //startInfo.FileName = "‪D:\\Users\\Pulpit\\dokument.docx";
+                //Debug.WriteLine("D:\\Users\\Pulpit\\BSI\\Zadanie domowe nr 1.pdf"); 
+                //Debug.WriteLine(PathResult.ToString()); 
+
+                startInfo.FileName = PathResult.ToString();
+                startInfo.Arguments = "\"" + PathResult.ToString() + "\"";
+                startInfo.UseShellExecute = true;
+                Debug.WriteLine(startInfo.Arguments);
+                Debug.WriteLine(startInfo.FileName);
+                Process.Start(startInfo);
+
+                //System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n" + PathResult.ToString());
+            }
+        }
+
+        private void comboBoxPhrases_Loaded(object sender, RoutedEventArgs e)
+        {
+            //var list = new List<string>((IEnumerable<string>)comboBoxPhrases.Items.SourceCollection);
+            
+            if (comboBoxPhrases.Items.GetItemAt(0).ToString() == String.Empty)
+            {
+                comboBoxPhrases.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        #region Properties, dependencies
+        public object ComboItems
+        {
+            get { return (object)GetValue(ComboItemsProperty); }
+            set { SetValue(ComboItemsProperty, value); }
+        }
+
+        public static readonly DependencyProperty ComboItemsProperty =
+            DependencyProperty.Register("ComboItems", typeof(object), typeof(SearchResultControl), new PropertyMetadata(0));
+
         public object PathResult
         {
             get { return (object)GetValue(PathResultProperty); }
             set { SetValue(PathResultProperty, value); }
         }
 
-        
         public static readonly DependencyProperty PathResultProperty =
             DependencyProperty.Register("PathResult", typeof(object), typeof(SearchResultControl), new PropertyMetadata(0));
 
@@ -61,5 +107,7 @@ namespace Szperacz.Wpf.Controls
 
         public static readonly DependencyProperty MatchPhraseResultProperty =
             DependencyProperty.Register("MatchPhraseResult", typeof(object), typeof(SearchResultControl), new PropertyMetadata(0));
+
+        #endregion
     }
 }

@@ -10,8 +10,9 @@
              Name="SearchResultWindow">
     <Grid x:Name="GridResultControl">
         <Grid.ColumnDefinitions >
-            <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="80"/>
 
         </Grid.ColumnDefinitions>
 
@@ -20,12 +21,19 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <TextBlock x:Name="TextBlockPath" Grid.Column="0" d:Text="Tekstowo" VerticalAlignment="Center" 
+                   Text="{Binding PathResult, ElementName=SearchResultWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+       
+        <TextBlock x:Name="TextBlockPhraseAmount" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" d:Text="Liczbowo" 
+                   Text="{Binding PhraseAmountResult, ElementName=SearchResultWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
 
-        <TextBlock x:Name="TextBlockPath" Grid.Column="1" d:Text="Tekstowo" VerticalAlignment="Center" Text="{Binding PathResult, ElementName=SearchResultWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBlock x:Name="TextBlockPhraseAmount" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" d:Text="Liczbowo" Text="{Binding PhraseAmountResult, ElementName=SearchResultWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
-        <TextBlock x:Name="TextBlockMatchPhrase" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" d:Text="Tekstowo" Text="{Binding MatchPhraseResult,ElementName=SearchResultWindow,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left"  Margin="20,0,0,0"  />
+        <ComboBox x:Name="comboBoxPhrases" ToolTip="Pasujące wyrażenia" Grid.Column="1" Grid.RowSpan="2" Height="30" 
+                  Margin="10 0 0 0" Width="70"
+                  ItemsSource="{Binding ComboItems, ElementName=SearchResultWindow}"
+                  Loaded="comboBoxPhrases_Loaded"/>
 
-        <Button x:Name="OpeningFile" Content="Otwórz" FontSize="15" Grid.Column="0" Grid.Row="0"  MaxHeight="30"
-                    mvx:Bi.nd="{Binding ButtonOpenClick, ElementName=SearchResultWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,10,0" Grid.RowSpan="2"/>
+        <Button x:Name="OpeningFile" Content="Otwórz" FontSize="15" Grid.Column="2"
+                Grid.Row="0" MaxHeight="30" Width="70"
+                    Margin="10,0,0,0" Grid.RowSpan="2" Click="OpeningFile_Click"/>
     </Grid>
 </UserControl>
