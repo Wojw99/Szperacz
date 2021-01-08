@@ -1,0 +1,4 @@
+C:\Users\Jakub Si³ka\Desktop\IO\lokacja\tekst — kopia.txt; 3
+C:\Users\Jakub Si³ka\Desktop\IO\lokacja\tekst.txt; 3
+C:\Users\Jakub Si³ka\Desktop\IO\lokacja\doc.docx; 1
+C:\Users\Jakub Si³ka\Desktop\IO\lokacja\pdf.pdf; 3

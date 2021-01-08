@@ -150,6 +150,8 @@ namespace Szperacz.Core.ViewModels
         /// </summary>
         public void SearchWord()
         {
+            ControlHelper.WordToFind = Word;
+
             if (IsCorrectPath(Path) && Word.Length > 0)
             {
                 var wordFound = SearchHandler.SearchWord(Word, Path, CreateChart, LetterSizeMeans, AutomaticSelection);

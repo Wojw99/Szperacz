@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Szperacz.Core.ViewModels;
 
 namespace Szperacz.Wpf.Controls
 {
@@ -30,21 +31,18 @@ namespace Szperacz.Wpf.Controls
             try
             {
                 var startInfo = new ProcessStartInfo();
-                //startInfo.FileName = "D:\\Users\\Pulpit\\BSI\\Zadanie domowe nr 1.pdf";
-                //startInfo.FileName = "‪D:\\Users\\Pulpit\\dokument.docx";
-                //Debug.WriteLine("D:\\Users\\Pulpit\\BSI\\Zadanie domowe nr 1.pdf"); 
-                //Debug.WriteLine(PathResult.ToString()); 
 
                 startInfo.FileName = PathResult.ToString();
                 startInfo.Arguments = "\"" + PathResult.ToString() + "\"";
                 startInfo.UseShellExecute = true;
-                Debug.WriteLine(startInfo.Arguments);
-                Debug.WriteLine(startInfo.FileName);
+
                 Process.Start(startInfo);
 
-                //System.Windows.Forms.SendKeys.SendWait("{ENTER}");
+                MessageBox.Show(ControlHelper.WordToFind);
+
+                // znajdź(ControlHelper.WordToFind)
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n" + PathResult.ToString());
             }

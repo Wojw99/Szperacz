@@ -21,6 +21,7 @@ namespace Szperacz.Core
         /// <returns></returns>
         public static bool SearchWord(string word, string path, bool createChart, bool letterSizeMeans, bool automaticSelection)
         {
+
             return true;
         }
 
@@ -70,8 +71,8 @@ namespace Szperacz.Core
         public static List<String> GetChartPaths()
         {
             return new List<string>() {
-                @"D:\Development\GitHub\Szperacz\Szperacz.Wpf\Src\chart1.jpg",
-                @"D:\Development\GitHub\Szperacz\Szperacz.Wpf\Src\chart2.jpg",
+                @"D:\Development\GitHub\Szperacz\Szperacz.Wpf\Src\chart1.png",
+                @"D:\Development\GitHub\Szperacz\Szperacz.Wpf\Src\chart2.png",
                 @"D:\Development\GitHub\Szperacz\Szperacz.Wpf\Src\chart3.jpg"
             };
         }
