@@ -1,5 +1,5 @@
-Lorem ipsum
-C:\Users\Jakub Siłka\Desktop\IO\lokacja
+value
+D:\Users\Pulpit\MathematicalModeling
 0
 4
 0

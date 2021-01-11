@@ -1,8 +1,10 @@
-﻿using System;
+﻿using IronPython.Hosting;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Szperacz.Core.Models;
 
 namespace Szperacz.Core
@@ -13,16 +15,46 @@ namespace Szperacz.Core
     public static class SearchHandler
     {
         private static readonly string pathListPath = "Src/paths.txt";
+        private static readonly string configPath = "Src/config.txt";
+        private static readonly string connectorPath = "Src/connector.txt";
         private static readonly string[] chartPaths = new string[] { };
 
         /// <summary>
         /// Gives arguments to the python script and turn on it.
         /// </summary>
         /// <returns></returns>
-        public static bool SearchWord(string word, string path, bool createChart, bool letterSizeMeans, bool automaticSelection)
+        public static async void SearchWord(string word, string path, bool createChart, bool letterSizeMeans, bool automaticSelection, int cpuThreadNumber)
         {
+            var list = new List<String> { word, path, Convert.ToInt32(letterSizeMeans).ToString(), cpuThreadNumber.ToString(), Convert.ToInt32(automaticSelection).ToString()};
+            File.WriteAllLines(configPath, list);
 
-            return true;
+            ProcessStartInfo start = new ProcessStartInfo();
+            var scriptPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "plik.py");
+            var appdata = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+            start.FileName = Path.Combine(appdata, @"Programs\Python\Python38\python.exe");
+            start.UseShellExecute = false;
+            start.WorkingDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Src");
+            start.Arguments = "plik.py";
+            start.RedirectStandardOutput = true;
+            start.RedirectStandardError = true;
+            start.LoadUserProfile = true;
+
+            using (Process process = Process.Start(start))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    string stderr = process.StandardError.ReadToEnd(); 
+                    string result = reader.ReadToEnd(); 
+                    Debug.WriteLine(stderr);
+                    Debug.WriteLine(result);
+                }
+            }
+        }
+
+        private static void SaveToConfig(List<String> list)
+        {
+            File.WriteAllLines(configPath, list);
         }
 
         /// <summary>
@@ -33,7 +65,7 @@ namespace Szperacz.Core
         {
             string text = "";
 
-            using (StreamReader r = new StreamReader(pathListPath, Encoding.UTF8))
+            using (StreamReader r = new StreamReader(connectorPath, Encoding.UTF8))
             {
                 text = r.ReadToEnd();
             }
@@ -41,11 +73,20 @@ namespace Szperacz.Core
             var lines = text.Split('\n');
             var list = new List<PathModel>();
 
-            foreach (var l in lines)
+            for(int i = 0; i < lines.Length - 1; i++)
             {
-                var elems = l.Split(';');
-                var model = new PathModel(elems[0], int.Parse(elems[1]), PhrasesMaker(elems[2]));
-                list.Add(model);
+                var elems = lines[i].Split(';');
+
+                if(elems.Length > 2)
+                {
+                    var model = new PathModel(elems[0], int.Parse(elems[1]), PhrasesMaker(elems[2]));
+                    list.Add(model);
+                }
+                else
+                {
+                    var model = new PathModel(elems[0], int.Parse(elems[1]), new List<String>() { "" } );
+                    list.Add(model);
+                }
             }
 
             return list;

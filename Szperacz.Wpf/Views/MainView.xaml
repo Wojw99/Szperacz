@@ -5,8 +5,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:cl="clr-namespace:Szperacz.Wpf.Controls"   
-             xmlns:local="clr-namespace:Szperacz.Wpf.Views"
+             xmlns:cl="clr-namespace:Szperacz.Wpf.Controls" 
+             xmlns:p="clr-namespace:Szperacz.Wpf.Properties"   
+             xmlns:local="clr-namespace:Szperacz.Wpf.Views"     
              mc:Ignorable="d"
              d:Height="720" d:Width="1280" FontSize="16" Background="White">
     <Grid>
@@ -45,7 +46,7 @@
         </StackPanel>
 
         <!-- Column 1, Row 2 -->
-        <cl:ExplorerBoxFolder Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" TextWatermark="Ścieżka"
+        <cl:ExplorerBoxFolder Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" TextWatermark="{x:Static p:Resources.WatermarkPath}"
                               VerticalAlignment="Center" HorizontalAlignment="Center"
                               ButtonClick="Command FolderCommand"
                               Width="{Binding ElementName=listBoxPaths, Path=ActualWidth}"
@@ -55,7 +56,7 @@
         <!-- Column 1, Row 3 -->
         <cl:ExplorerBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"
                         VerticalAlignment="Center" HorizontalAlignment="Center"
-                        TextWatermark="Szukana fraza"
+                        TextWatermark="{x:Static p:Resources.WatermarkPhrase}"
                         Width="{Binding ElementName=listBoxPaths, Path=ActualWidth}"
                         ExItemSource="{Binding PhraseHistoryList}"
                         TextInside="{Binding Word, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -63,22 +64,22 @@
         <!-- Column 1, Row 4 -->
         <CheckBox Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Padding="10 -4" Height="30" VerticalContentAlignment="Center"
                   IsChecked="{Binding LetterSizeMeans, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                  Content="Wielkość liter ma znaczenie"/>
+                  Content="{x:Static p:Resources.CheckBoxLetterSize}"/>
 
         <!-- Column 2, Row 4 -->
-        <ComboBox Grid.Column="2" Grid.Row="4" MaxWidth="150" MaxHeight="30" ToolTip="Liczba wątków" HorizontalAlignment="Right"
-                  MinWidth="95"
+        <ComboBox Grid.Column="2" Grid.Row="4" MaxWidth="150" MaxHeight="30" ToolTip="{x:Static p:Resources.TooltipThreadNumber}" HorizontalAlignment="Right"
+                  MinWidth="95" SelectedIndex="{Binding SelectedThreadIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding CpuThreadList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
         <!-- Column 1, Row 5 -->
         <CheckBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Padding="10 -4" Height="30" VerticalContentAlignment="Center"
                   IsChecked="{Binding CreateChart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                  Content="Utwórz wykres"/>
+                  Content="{x:Static p:Resources.CheckBoxCreateGraphs}"/>
 
         <!-- Column 1, Row 6 -->
         <Button Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" MaxWidth="80" MaxHeight="30"
                 mvx:Bi.nd="Command SearchCommand" 
-                Content="Szukaj"/>
+                Content="{x:Static p:Resources.ButtonSearch}"/>
         
         <!-- Column 1, Row 7 -->
         <ListBox x:Name="listBoxPaths" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2"
@@ -100,7 +101,7 @@
         <!-- Column 1, Row 8 -->
         <CheckBox Grid.Column="1" Grid.Row="8" VerticalAlignment="Center" Padding="10 -4" Height="30" VerticalContentAlignment="Center"
                   IsChecked="{Binding AutomaticSelection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                  Content="Automatyczne zaznaczanie"/>
+                  Content="{x:Static p:Resources.CheckBoxAutoSelection}"/>
         
         <!-- Column 5, Row 1 -->
         <Border Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" Padding="15">

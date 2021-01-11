@@ -130,10 +130,13 @@
     <value>Utwórz wykres</value>
   </data>
   <data name="CheckBoxLetterSize" xml:space="preserve">
-    <value>Wielkość liter ma znaczenie</value>
+    <value>Wielkość liter nie ma znaczenie</value>
   </data>
   <data name="OpenButton" xml:space="preserve">
     <value>Otwórz</value>
+  </data>
+  <data name="TooltipThreadNumber" xml:space="preserve">
+    <value>Liczba wątków</value>
   </data>
   <data name="WarningNotFound" xml:space="preserve">
     <value>Nie znaleziono szukanej frazy w podanej ścieżce!</value>

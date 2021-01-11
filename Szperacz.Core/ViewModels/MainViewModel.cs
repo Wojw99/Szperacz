@@ -29,6 +29,7 @@ namespace Szperacz.Core.ViewModels
 
         private ObservableCollection<PathModel> _outputPathList = new ObservableCollection<PathModel>();
         private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "1", "2", "3", "4", "5", "10", "20", "30", "50" };
+        private int _selectedThreadIndex = 3;
 
         private readonly ObservableCollection<SearchModel> historyList = new ObservableCollection<SearchModel>(HistoryHandler.DeserializeHistoryList());
         private ObservableCollection<string> _pathHistoryList = new ObservableCollection<string>();
@@ -154,7 +155,9 @@ namespace Szperacz.Core.ViewModels
 
             if (IsCorrectPath(Path) && Word.Length > 0)
             {
-                var wordFound = SearchHandler.SearchWord(Word, Path, CreateChart, LetterSizeMeans, AutomaticSelection);
+                int number = Int32.Parse(CpuThreadList[SelectedThreadIndex]);
+                var wordFound = true;
+                SearchHandler.SearchWord(Word, Path, CreateChart, LetterSizeMeans, AutomaticSelection, number);
                 AddToHistory(Word, Path);
 
                 if (wordFound)
@@ -191,6 +194,12 @@ namespace Szperacz.Core.ViewModels
         #endregion
 
         #region Properties
+        public int SelectedThreadIndex
+        {
+            get { return _selectedThreadIndex; }
+            set { SetProperty(ref _selectedThreadIndex, value); }
+        }
+
         public string MessageBoxText
         {
             get { return _messageBoxText; }

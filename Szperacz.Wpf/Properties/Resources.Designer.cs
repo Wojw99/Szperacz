@@ -97,7 +97,7 @@ namespace Szperacz.Wpf.Properties {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Letter size means.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Letter size not means.
         /// </summary>
         public static string CheckBoxLetterSize {
             get {
@@ -111,6 +111,15 @@ namespace Szperacz.Wpf.Properties {
         public static string OpenButton {
             get {
                 return ResourceManager.GetString("OpenButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Thread number.
+        /// </summary>
+        public static string TooltipThreadNumber {
+            get {
+                return ResourceManager.GetString("TooltipThreadNumber", resourceCulture);
             }
         }
         

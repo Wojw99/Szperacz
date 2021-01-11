@@ -130,10 +130,13 @@
     <value>Create graphs</value>
   </data>
   <data name="CheckBoxLetterSize" xml:space="preserve">
-    <value>Letter size means</value>
+    <value>Letter size not means</value>
   </data>
   <data name="OpenButton" xml:space="preserve">
     <value>Open</value>
+  </data>
+  <data name="TooltipThreadNumber" xml:space="preserve">
+    <value>Thread number</value>
   </data>
   <data name="WarningNotFound" xml:space="preserve">
     <value>The search phrase was not found in the given path!</value>

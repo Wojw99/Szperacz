@@ -1,3 +1,5 @@
+# coding=ascii
+
 import os, fitz
 from docx import Document
 import matplotlib.pyplot as plt
@@ -52,7 +54,7 @@ class TargetFille:
     
     def ConfigurationFile():
 
-        with open("config.txt","r", encoding="utf-8") as config:
+        with open("./config.txt","r", encoding="utf-8") as config:
             txtConfig=TargetFille.NoEnter(config.readlines())
             Target=txtConfig[0].split(" ")
             Size, Files=TargetFille.GiveAllFilles(txtConfig[1])
