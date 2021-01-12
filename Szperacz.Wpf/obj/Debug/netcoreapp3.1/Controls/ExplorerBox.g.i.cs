@@ -95,7 +95,7 @@ namespace Szperacz.Wpf.Controls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Szperacz.Wpf;component/controls/explorerbox.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Szperacz.Wpf;V1.0.0.0;component/controls/explorerbox.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Controls\ExplorerBox.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

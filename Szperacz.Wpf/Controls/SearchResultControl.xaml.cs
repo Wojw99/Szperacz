@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -19,7 +20,7 @@ namespace Szperacz.Wpf.Controls
     /// <summary>
     /// Logika interakcji dla klasy SearchResultControl.xaml
     /// </summary>
-    public partial class SearchResultControl : UserControl
+    public partial class SearchResultControl : System.Windows.Controls.UserControl
     {
         public SearchResultControl()
         {
@@ -36,16 +37,21 @@ namespace Szperacz.Wpf.Controls
                 startInfo.Arguments = "\"" + PathResult.ToString() + "\"";
                 startInfo.UseShellExecute = true;
 
-                Process.Start(startInfo);
+                Process.Start(startInfo).OutputDataReceived += SearchResultControl_OutputDataReceived; ;
 
-                MessageBox.Show(ControlHelper.WordToFind);
-
-                // znajdź(ControlHelper.WordToFind)
+                //System.Windows.MessageBox.Show(ControlHelper.WordToFind);
+                
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n" + PathResult.ToString());
+                System.Windows.MessageBox.Show(ex.Message + "\n" + PathResult.ToString());
             }
+        }
+
+        private void SearchResultControl_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            //SendKeys.SendWait("{ENTER}");
+            System.Windows.MessageBox.Show(ControlHelper.WordToFind);
         }
 
         private void comboBoxPhrases_Loaded(object sender, RoutedEventArgs e)

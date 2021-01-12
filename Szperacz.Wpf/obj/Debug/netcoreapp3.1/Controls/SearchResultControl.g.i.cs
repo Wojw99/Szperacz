@@ -103,7 +103,7 @@ namespace Szperacz.Wpf.Controls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Szperacz.Wpf;component/controls/searchresultcontrol.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Szperacz.Wpf;V1.0.0.0;component/controls/searchresultcontrol.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Controls\SearchResultControl.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

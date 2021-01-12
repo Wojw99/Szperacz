@@ -54,7 +54,7 @@ namespace Szperacz.Wpf.Icons {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Szperacz.Wpf;component/icons/phraseicon.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Szperacz.Wpf;V1.0.0.0;component/icons/phraseicon.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Icons\PhraseIcon.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

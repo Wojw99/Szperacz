@@ -8,4 +8,11 @@ namespace Szperacz.Core.ViewModels
     {
         public static string WordToFind { get; set; } = "pomidor";
     }
+
+    enum MessageType
+    {
+        PhraseIncorrect,
+        PathIncorrect,
+        PhraseNotFound
+    }
 }

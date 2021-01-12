@@ -156,11 +156,10 @@ namespace Szperacz.Core.ViewModels
             if (IsCorrectPath(Path) && Word.Length > 0)
             {
                 int number = Int32.Parse(CpuThreadList[SelectedThreadIndex]);
-                var wordFound = true;
                 SearchHandler.SearchWord(Word, Path, CreateChart, LetterSizeMeans, AutomaticSelection, number);
                 AddToHistory(Word, Path);
 
-                if (wordFound)
+                if (SearchHandler.WordFound())
                 {
                     OutputPathList = new ObservableCollection<PathModel>(SearchHandler.GetPaths());
 
@@ -180,7 +179,7 @@ namespace Szperacz.Core.ViewModels
                 {
                     ClearGraphs();
                     OutputPathList = new ObservableCollection<PathModel>();
-                    ShowWarning("Nie znaleziono szukanej frazy w podanej ścieżce!", 3000);
+                    ShowWarning("Nie znaleziono frazy w podanej ścieżce!", 3000);
                 }
             }
             else 
