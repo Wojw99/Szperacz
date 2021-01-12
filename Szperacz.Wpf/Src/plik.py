@@ -1,5 +1,3 @@
-# coding=ascii
-
 import os, fitz
 from docx import Document
 import matplotlib.pyplot as plt
@@ -17,6 +15,20 @@ class TargetFille:
         self.Ext=Ext
         self.n_Target=len(Target)
 
+   #nie uzywana     
+    def deletechar(string):
+        beg=string[0]
+        end=string[-1]
+        if not ((ord(beg)>96 and ord(beg)<123) or (ord(beg)>64 and ord(beg)<91) or (ord(beg)>47 and ord(beg)<58)):
+            string=string[1:]
+            return TargetFille.deletechar(string)
+        if not ((ord(end)>96 and ord(end)<123) or (ord(end)>64 and ord(end)<91) or (ord(end)>47 and ord(end)<58)):
+            string=string[:-1]
+            return TargetFille.deletechar(string)
+    
+        return string
+       
+        
         
         
         
@@ -54,7 +66,7 @@ class TargetFille:
     
     def ConfigurationFile():
 
-        with open("./config.txt","r", encoding="utf-8") as config:
+        with open("config.txt","r", encoding="utf-8") as config:
             txtConfig=TargetFille.NoEnter(config.readlines())
             Target=txtConfig[0].split(" ")
             Size, Files=TargetFille.GiveAllFilles(txtConfig[1])
@@ -87,8 +99,8 @@ class TargetFille:
                         endTable.append([file,0])
                         allLines=TargetFille.NoEnter(TargetFille.NoSpace(txtFile.readlines()))
                         for line in allLines:
-                            if regex.MATCH(line.upper(),Target[n_pointer].upper()):
-                                if regex.MATCH(line,Target[n_pointer]) or IgnoreSize:
+                            if regex.MATCH(line.upper(),Target[n_pointer].upper()+"[,.;?!]?"):
+                                if regex.MATCH(line,Target[n_pointer]+"[,.;?!]?") or IgnoreSize:
                                     n_pointer+=1
                                     if n_pointer==n_Target:
                                         endTable[-1][1]+=1
@@ -119,8 +131,8 @@ class TargetFille:
                     doc = Document(files)
                     endTable.append([files,0])
                     for para in doc.paragraphs:          
-                            if regex.MATCH(para.text.upper(),Target[n_pointer].upper()):
-                                if regex.MATCH(para.text,Target[n_pointer]) or IgnoreSize:
+                            if regex.MATCH(para.text.upper(),Target[n_pointer].upper()+"[,.;?!]?"):
+                                if regex.MATCH(para.text,Target[n_pointer]+"[,.;?!]?") or IgnoreSize:
                                     n_pointer+=1
                                     if n_pointer==n_Target:
                                         endTable[-1][1]+=1
@@ -156,8 +168,12 @@ class TargetFille:
                         page = pdf.loadPage(i)
                         text=page.getText("text").split(" ")
                         for line in text:
-                            if regex.MATCH(line.upper(),Target[n_pointer].upper()):
-                                if regex.MATCH(line,Target[n_pointer]) or IgnoreSize:
+                            if "Hawański".upper() in line.upper():
+                                print(line,"1",line.upper(),".?"+Target[n_pointer].upper()+".?") ###tutaj <<<<
+                            if regex.MATCH(line.upper(),".?"+Target[n_pointer].upper()+".?"):
+                                print(line,"Kurła")
+                                if regex.MATCH(line,".?"+Target[n_pointer]+".?") or IgnoreSize:
+                                    print(line,"2")
                                     n_pointer+=1
                                     if n_pointer==n_Target:
                                         endTable[-1][1]+=1

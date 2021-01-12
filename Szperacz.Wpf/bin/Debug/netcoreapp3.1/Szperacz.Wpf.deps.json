@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "Szperacz.Wpf/1.0.0": {
         "dependencies": {
+          "InputSimulator": "1.0.4",
           "MvvmCross.Platforms.Wpf": "7.1.2",
           "MvvmCross.Plugin.ResourceLoader": "7.1.2",
           "Szperacz.Core": "1.0.0"
@@ -38,6 +39,14 @@
           "lib/netcoreapp3.1/Microsoft.Scripting.dll": {
             "assemblyVersion": "1.3.0.0",
             "fileVersion": "1.3.0.1000"
+          }
+        }
+      },
+      "InputSimulator/1.0.4": {
+        "runtime": {
+          "lib/net20/WindowsInput.dll": {
+            "assemblyVersion": "1.0.4.0",
+            "fileVersion": "1.0.4.0"
           }
         }
       },
@@ -180,6 +189,13 @@
       "sha512": "sha512-a3ATP2CAiAQdcnj5mBgyhqyjoAiCXjuiLY8x3yAmo2Uacs7ecKvre8sc30dcgfN9YGAM9s9dvBIlyqisJLg1ew==",
       "path": "dynamiclanguageruntime/1.3.0",
       "hashPath": "dynamiclanguageruntime.1.3.0.nupkg.sha512"
+    },
+    "InputSimulator/1.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-D0LvRCPQMX6/FJHBjng+RO+wRDuHTJrfo7IAc7rmkPvRqchdVGJWg3y70peOtDy3OLNK+HSOwVkH4GiuLnkKgA==",
+      "path": "inputsimulator/1.0.4",
+      "hashPath": "inputsimulator.1.0.4.nupkg.sha512"
     },
     "IronPython/2.7.11": {
       "type": "package",

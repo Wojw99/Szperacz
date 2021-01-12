@@ -1,5 +1,5 @@
-value
-D:\Users\Pulpit\MathematicalModeling
-0
-4
+hawański
+C:\Users\Jakub Siłka\Desktop\IO\lokacja\
+1
+1
 0

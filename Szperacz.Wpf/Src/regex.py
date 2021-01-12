@@ -117,7 +117,7 @@ class Lexer(object):
 EPSILON = -1
 CCL = -2
 EMPTY = -3
-ASCII_COUNT = 127
+ASCII_COUNT = 10000 #127
 ########################
 #NFA CLASS
 class Nfa(object):
@@ -478,3 +478,4 @@ if __name__ == "__main__":
     #MATCH('AS342abcdefg234aaaaabccccczczxczcasdzxc','([A-Z]+[0-9]*abcdefg)([0-9]*)(\*?|a+)(zx|bc*)([a-z]+|[0-9]*)(asd|fgh)(zxc)')
    print(MATCH('Ala. ma kota a kota nie ma druga Ala.','Ala'))
    print( MATCH('Juhu huuuuhu huuhu huhu','h[a-z]*hu'))
+   print( MATCH('HAWAŃSKI','HAWAŃSKI[,.;?!]?'))

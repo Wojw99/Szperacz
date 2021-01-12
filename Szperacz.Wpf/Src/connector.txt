@@ -1,1 +1,3 @@
-D:\Users\Pulpit\Szperacz\text.txt; 1
+C:\Users\Jakub Si³ka\Desktop\IO\lokacja\TEXT.txt; 4
+C:\Users\Jakub Si³ka\Desktop\IO\lokacja\DOCX.docx; 4
+C:\Users\Jakub Si³ka\Desktop\IO\lokacja\PDF.pdf; 2

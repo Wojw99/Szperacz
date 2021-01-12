@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 using Szperacz.Core.ViewModels;
+using WindowsInput;
+using WindowsInput.Native;
 
 namespace Szperacz.Wpf.Controls
 {
@@ -27,25 +18,40 @@ namespace Szperacz.Wpf.Controls
             InitializeComponent();
         }
 
-        private void OpeningFile_Click(object sender, RoutedEventArgs e)
+        private async void OpeningFile_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var startInfo = new ProcessStartInfo();
+                var startInfo = new ProcessStartInfo();      
 
                 startInfo.FileName = PathResult.ToString();
                 startInfo.Arguments = "\"" + PathResult.ToString() + "\"";
                 startInfo.UseShellExecute = true;
 
-                Process.Start(startInfo).OutputDataReceived += SearchResultControl_OutputDataReceived; ;
+                Process.Start(startInfo);
+                await Task.Delay(500);
 
-                //System.Windows.MessageBox.Show(ControlHelper.WordToFind);
-                
+                var path = PathResult as string;
+                if (path.Contains(".txt"))
+                {
+                    SimulateCtrlPlusF();
+                }
             }
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show(ex.Message + "\n" + PathResult.ToString());
             }
+        }
+
+        private void SimulateCtrlPlusF()
+        {
+            var sim = new InputSimulator();
+            var wordToType = ControlHelper.WordToFind;
+            sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_F)
+                .TextEntry(wordToType)
+                .KeyPress(VirtualKeyCode.RETURN)
+                .Sleep(200)
+                .KeyPress(VirtualKeyCode.CANCEL);
         }
 
         private void SearchResultControl_OutputDataReceived(object sender, DataReceivedEventArgs e)
@@ -83,14 +89,14 @@ namespace Szperacz.Wpf.Controls
         public static readonly DependencyProperty PathResultProperty =
             DependencyProperty.Register("PathResult", typeof(object), typeof(SearchResultControl), new PropertyMetadata(0));
 
-        public object ButtonOpenClick
-        {
-            get { return (object)GetValue(ButtonOpenClickProperty); }
-            set { SetValue(ButtonOpenClickProperty, value); }
-        }
+        //public object ButtonOpenClick
+        //{
+        //    get { return (object)GetValue(ButtonOpenClickProperty); }
+        //    set { SetValue(ButtonOpenClickProperty, value); }
+        //}
 
-        public static readonly DependencyProperty ButtonOpenClickProperty =
-            DependencyProperty.Register("ButtonOpenClick", typeof(object), typeof(SearchResultControl), new PropertyMetadata(0));
+        //public static readonly DependencyProperty ButtonOpenClickProperty =
+        //    DependencyProperty.Register("ButtonOpenClick", typeof(object), typeof(SearchResultControl), new PropertyMetadata(0));
 
         public object PhraseAmountResult
         {
