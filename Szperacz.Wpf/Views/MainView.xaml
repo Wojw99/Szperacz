@@ -123,18 +123,67 @@
             <Image Source="{Binding Chart3Path}"/>
         </Border>
 
-        <!-- Column 1, Row 8 (ALERT) -->
-        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="6" Padding="0" 
-                VerticalAlignment="Center" Opacity="0.9" 
-                Height="{Binding MessageBoxVisibility}"
-                BorderBrush="Gray" BorderThickness="1" Background="LightGoldenrodYellow">
-            <TextBlock Text="{Binding MessageBoxText}" TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5"/>
+        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="2" Padding="0" 
+                VerticalAlignment="Center" Opacity="1" 
+                Height="35" BorderBrush="Gray" BorderThickness="1" Background="White">
+            <Grid>
+                <TextBlock Text="..." Background="White"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5"/>
+                <TextBlock Text="{x:Static p:Resources.AlertPleaseWait}" x:Name="borderWait" Visibility="Hidden" Background="White"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5"/>
+                <TextBlock Text="{x:Static p:Resources.WarningPhraseIncorrect}" 
+                           Height="{Binding MbHeightPhraseIncorrect}"
+                           TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5" Background="White"/>
+                <TextBlock Text="{x:Static p:Resources.WarningPathIncorrect}" 
+                           Height="{Binding MbHeightPathIncorrect}"
+                           TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5" Background="White"/>
+                <TextBlock Text="{x:Static p:Resources.WarningNotFound}" 
+                           Height="{Binding MbHeightNotFound}"
+                           TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5" Background="White"/>
+                <TextBlock Text="{Binding MessageBoxText}" 
+                           Height="{Binding MessageBoxVisibility}"
+                           TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5" Background="White"/>
+            </Grid>
         </Border>
 
-        <Border x:Name="borderWait" Grid.ColumnSpan="8" Grid.RowSpan="10" 
-                Background="LightGray" Opacity="0.2" Visibility="Hidden">
+        <!-- Column 1, Row 8 (ALERT - please wait...) -->
+        <!--<Border x:Name="borderWait" 
+                Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="2" Padding="0" Height="35"
+                BorderBrush="Gray" BorderThickness="1" Background="White" Visibility="Hidden">
             <TextBlock Text="{x:Static p:Resources.AlertPleaseWait}" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                       FontSize="45"/>
+                       FontSize="18" FontWeight="Bold" Padding="5"/>
+        </Border>-->
+
+        <!-- Column 1, Row 8 (WARNING - path incorrect) --><!--
+        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="2" Padding="0" 
+                VerticalAlignment="Center" Opacity="1" 
+                Height="{Binding MbHeightPathIncorrect}"
+                BorderBrush="Gray" BorderThickness="1" Background="White">
+            <TextBlock Text="{x:Static p:Resources.WarningPathIncorrect}" TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5"/>
         </Border>
+
+        --><!-- Column 1, Row 8 (WARNING - path incorrect) --><!--
+        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="2" Padding="0" 
+                VerticalAlignment="Center" Opacity="1" 
+                Height="{Binding MbHeightNotFound}"
+                BorderBrush="Gray" BorderThickness="1" Background="White">
+            <TextBlock Text="{x:Static p:Resources.WarningNotFound}" TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5"/>
+        </Border>
+
+        --><!-- Column 1, Row 8 (WARNING - path incorrect) --><!--
+        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="2" Padding="0" 
+                VerticalAlignment="Center" Opacity="1" 
+                Height="{Binding MbHeightPhraseIncorrect}"
+                BorderBrush="Gray" BorderThickness="1" Background="White">
+            <TextBlock Text="{x:Static p:Resources.WarningPhraseIncorrect}" TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5"/>
+        </Border>
+
+        --><!-- Column 1, Row 8 (WARNING) --><!--
+        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="2" Padding="0" 
+                VerticalAlignment="Center" Opacity="1" 
+                Height="{Binding MessageBoxVisibility}"
+                BorderBrush="Gray" BorderThickness="1" Background="White">
+            <TextBlock Text="{Binding MessageBoxText}" TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5"/>
+        </Border>-->
     </Grid>
 </views:MvxWpfView>

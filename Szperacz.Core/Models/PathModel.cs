@@ -22,16 +22,40 @@ namespace Szperacz.Core.Models
             return $"{Path} {PhraseAmount} {MatchingPhrases}";
         }
 
-        public override bool Equals(object obj)
+        public bool Equals(PathModel p)
         {
-            var other = obj as PathModel;
+            // If parameter is null, return false.
+            if (Object.ReferenceEquals(p, null))
+            {
+                return false;
+            }
 
-            if(this.Path == other.Path && this.PhraseAmount == other.PhraseAmount)
+            // Optimization for a common success case.
+            if (Object.ReferenceEquals(this, p))
             {
                 return true;
             }
 
-            return false;
+            // If run-time types are not exactly the same, return false.
+            if (this.GetType() != p.GetType())
+            {
+                return false;
+            }
+
+            // Return true if the fields match.
+            // Note that the base class is not invoked because it is
+            // System.Object, which defines Equals as reference equality.
+            return (Path == p.Path && PhraseAmount == p.PhraseAmount);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.Equals(obj as PathModel);
+        }
+
+        public override int GetHashCode()
+        {
+            return PhraseAmount * 0x00010000 + Path.GetHashCode();
         }
     }
 }

@@ -11,12 +11,14 @@ class DUAL:
         self.ile = ile
         self.ext = ext
         self.name = name
+        
 
 class TargetFille:
-    def __init__(self,FilesTab,Target):
+    def __init__(self,FilesTab,Target, IgnoreSize = True):
         self.FilesTab=FilesTab
         self.Target=Target
-
+        self.IgnoreSize = IgnoreSize
+        print("Ignore Size: ",IgnoreSize)
         
     def GiveAllFilles(path):
         #txt/docx/pdf
@@ -66,7 +68,7 @@ class TargetFille:
             except:
                 ThreadNumber=1
 
-                 
+        
         return Target, Size, Files, IgnoreSize, ThreadNumber
     
 
@@ -89,7 +91,10 @@ class TargetFille:
                     for line in lines:
                         text += line
                     text = text.replace('\n', " ")
-                    matches_count = regex.MATCH(text,Target)
+                    if self.IgnoreSize:
+                        matches_count = regex.MATCH(text,Target)
+                    else:
+                        matches_count = regex.MATCHBS(text,Target)
 
                     #print("Found in txt:",matches_count)
 
@@ -115,7 +120,10 @@ class TargetFille:
                         text += para.text
                     text.replace("\n"," ")
                     
-                    matches_count = regex.MATCH(text,Target)
+                    if self.IgnoreSize:
+                        matches_count = regex.MATCH(text,Target)
+                    else:
+                        matches_count = regex.MATCHBS(text,Target)
 
                     #print("Found in docx:",matches_count)
 
@@ -147,7 +155,10 @@ class TargetFille:
                         
                     text.replace("\n"," ")
 
-                    matches_count = regex.MATCH(text,Target)
+                    if self.IgnoreSize:
+                        matches_count = regex.MATCH(text,Target)
+                    else:
+                        matches_count = regex.MATCHBS(text,Target)
 
                     #print("Found in pdf:",matches_count)
                 except Exception as e:
@@ -307,7 +318,7 @@ if __name__ == "__main__":
     freeze_support()
 
     Target, Size, Files, IgnoreSize, ThreadNumber=TargetFille.ConfigurationFile()
-    main_thread = TargetFille(Files, Target)
+    main_thread = TargetFille(Files, Target, IgnoreSize)
     
 
     AllTargets = []

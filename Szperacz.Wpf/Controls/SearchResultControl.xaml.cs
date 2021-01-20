@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Windows;
 using Szperacz.Core.ViewModels;
-using WindowsInput;
-using WindowsInput.Native;
 
 namespace Szperacz.Wpf.Controls
 {

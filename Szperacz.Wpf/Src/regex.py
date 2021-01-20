@@ -474,14 +474,35 @@ def MATCH(string:str,pattern:str):
             return False
         regex = Regex(word.lower(), pattern)
         result = regex.match()
-        if result or word.find(pattern.lower()) != -1:
+        if result or word.lower().find(pattern.lower()) != -1:
             match_count += 1
             match_position.append(i)
 
 
-    #print("Input text: "+string+"\n"+"Regex: "+pattern+"\n"+"Match: "+str(match_count)+" times")
-    return match_count#, match_position
-    #return match_count>0
+    return match_count
+
+def MATCHBS(string:str,pattern:str):
+    words = string.split()
+    modulo = 1
+    if len(pattern.split()) > 1:
+        modulo = len(pattern.split())
+    match_count = 0
+    match_position = []
+    pattern = ".?"+pattern.strip().replace(" ",".?")+".?"
+    for i in range(len(words)-modulo+1):
+        word = words[i].strip()
+        for j in range(1,modulo):
+            word += " " + words[i+j].strip()
+        if (word == ""):
+            return False
+        regex = Regex(word, pattern)
+        result = regex.match()
+        if result or word.find(pattern) != -1:
+            match_count += 1
+            match_position.append(i)
+
+
+    return match_count
 
 if __name__ == "__main__":
     #MATCH('AS342abcdefg234aaaaabccccczczxczcasdzxc','([A-Z]+[0-9]*abcdefg)([0-9]*)(\*?|a+)(zx|bc*)([a-z]+|[0-9]*)(asd|fgh)(zxc)')

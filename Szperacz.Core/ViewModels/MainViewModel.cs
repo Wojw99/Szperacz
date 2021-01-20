@@ -8,9 +8,7 @@ using System.Linq;
 using Szperacz.Core.Models;
 using Ookii.Dialogs.Wpf;
 using System.Timers;
-using System.Threading;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace Szperacz.Core.ViewModels
 {
@@ -27,8 +25,11 @@ namespace Szperacz.Core.ViewModels
         private bool _automaticSelection = false;
 
         private double _messageBoxVisibility = 0;
+        private double _mbHeightPhraseIncorrect = 0;
+        private double _mbHeightNotFound = 0;
+        private double _mbHeightPathIncorrect = 0;
         private string _messageBoxText = "Nieprawidłowa wartość!";
-        private readonly System.Timers.Timer timer = new System.Timers.Timer(2000);
+        private readonly Timer timer = new Timer(2000);
 
         private ObservableCollection<PathModel> _outputPathList = new ObservableCollection<PathModel>();
         private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "1", "2", "4", "8", "16", "32", "64" };
@@ -51,21 +52,6 @@ namespace Szperacz.Core.ViewModels
 
         #region Helper Methods
         /// <summary>
-        /// Clear graphs in the GUI and delete images.
-        /// </summary>
-        private void DeleteGraphs()
-        {
-            var graphPaths = SearchHandler.GetChartPaths();
-            foreach(var x in graphPaths)
-            {
-                if (File.Exists(x))
-                {
-                    File.Delete(x);
-                }
-            }
-        }
-
-        /// <summary>
         /// Add a new object to the history and refreshes view.
         /// </summary>
         private void AddToHistory(string phrase, string path)
@@ -84,7 +70,7 @@ namespace Szperacz.Core.ViewModels
             foreach (var d in drives) driveNames.Add(d.Name);
 
             if (path.Length < 4) return false;
-            if (!driveNames.Contains(path.Substring(0, 3))) return false;
+            if (!driveNames.Contains(path.Substring(0, 3).ToUpper())) return false;
 
             return true;
         }
@@ -103,13 +89,35 @@ namespace Szperacz.Core.ViewModels
         /// <param name="interval">Time of the waring</param>
         private void ShowWarning(string text, double interval = 2000)
         {
-            Debug.WriteLine("Show warning");
             MessageBoxText = text;
             MessageBoxVisibility = 35;
             timer.Elapsed += timerElapsed;
             timer.Interval = interval;
             timer.Start();
-            Debug.WriteLine("End function");
+        }
+
+        /// <summary>
+        /// Show a warning to the user and count down a timer.
+        /// </summary>
+        /// <param name="text">Message to the user</param>
+        /// <param name="interval">Time of the waring</param>
+        private void ShowWarning(MessageType type, double interval = 2000)
+        {
+            if(type == MessageType.PathIncorrect)
+            {
+                MbHeightPathIncorrect = 35;
+            }
+            else if (type == MessageType.PhraseIncorrect)
+            {
+                MbHeightPhraseIncorrect = 35;
+            }
+            else if (type == MessageType.PhraseNotFound)
+            {
+                MbHeightNotFound = 35;
+            }
+            timer.Elapsed += timerElapsed;
+            timer.Interval = interval;
+            timer.Start();
         }
 
         /// <summary>
@@ -118,8 +126,10 @@ namespace Szperacz.Core.ViewModels
         private void timerElapsed(object sender, ElapsedEventArgs e)
         {
             MessageBoxVisibility = 0;
+            MbHeightNotFound = 0;
+            MbHeightPhraseIncorrect = 0;
+            MbHeightPathIncorrect = 0;
             timer.Stop();
-            Debug.WriteLine("End warning");
         }
         #endregion
 
@@ -210,15 +220,15 @@ namespace Szperacz.Core.ViewModels
                 {
                     ClearGraphs();
                     OutputPathList = new ObservableCollection<PathModel>();
-                    ShowWarning("Nie znaleziono frazy w podanej ścieżce!", 3000);
+                    ShowWarning(MessageType.PhraseNotFound, 3000);
                 }
             }
             else
             {
                 ClearGraphs();
                 OutputPathList = new ObservableCollection<PathModel>();
-                if (!IsCorrectPath(Path)) ShowWarning("Ścieżka nieprawidłowa!");
-                else ShowWarning("Brak podanej frazy!");
+                if (!IsCorrectPath(Path)) ShowWarning(MessageType.PathIncorrect);
+                else ShowWarning(MessageType.PhraseIncorrect);
             }
         }
         #endregion
@@ -240,6 +250,22 @@ namespace Szperacz.Core.ViewModels
         {
             get { return _messageBoxVisibility; }
             set { SetProperty(ref _messageBoxVisibility, value); }
+        }
+        public double MbHeightPhraseIncorrect
+        {
+            get { return _mbHeightPhraseIncorrect; }
+            set { SetProperty(ref _mbHeightPhraseIncorrect, value); }
+        }
+        public double MbHeightNotFound
+        {
+            get { return _mbHeightNotFound; }
+            set { SetProperty(ref _mbHeightNotFound, value); }
+        }
+
+        public double MbHeightPathIncorrect
+        {
+            get { return _mbHeightPathIncorrect; }
+            set { SetProperty(ref _mbHeightPathIncorrect, value); }
         }
 
         public string Chart1Path

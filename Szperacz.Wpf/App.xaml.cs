@@ -14,7 +14,7 @@ namespace Szperacz.Wpf
         {
             var pl = "pl-PL";
             var en = "en-EN";
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(pl);
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(en);
         }
 
         protected override void RegisterSetup()
