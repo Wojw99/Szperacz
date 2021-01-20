@@ -19,5 +19,15 @@ namespace Szperacz.Core.Models
         {
             return $"{Phrase}, {FolderPath}";
         }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as SearchModel;
+            if(other.FolderPath == this.FolderPath && other.Phrase == this.Phrase)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

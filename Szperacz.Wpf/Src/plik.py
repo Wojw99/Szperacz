@@ -3,34 +3,20 @@ from docx import Document
 import matplotlib.pyplot as plt
 import concurrent.futures
 import regex
+from multiprocessing import Process, Manager, Lock, Array, Pool, freeze_support
+from multiprocessing.managers import BaseManager
 
-
-
+class DUAL:
+    def __init__(self,ile:int,ext:str,name=None):
+        self.ile = ile
+        self.ext = ext
+        self.name = name
 
 class TargetFille:
-    def __init__(self,FilesTab,Target,IgnoreSize,Ext):
+    def __init__(self,FilesTab,Target):
         self.FilesTab=FilesTab
         self.Target=Target
-        self.IgnoreSize=IgnoreSize
-        self.Ext=Ext
-        self.n_Target=len(Target)
 
-   #nie uzywana     
-    def deletechar(string):
-        beg=string[0]
-        end=string[-1]
-        if not ((ord(beg)>96 and ord(beg)<123) or (ord(beg)>64 and ord(beg)<91) or (ord(beg)>47 and ord(beg)<58)):
-            string=string[1:]
-            return TargetFille.deletechar(string)
-        if not ((ord(end)>96 and ord(end)<123) or (ord(end)>64 and ord(end)<91) or (ord(end)>47 and ord(end)<58)):
-            string=string[:-1]
-            return TargetFille.deletechar(string)
-    
-        return string
-       
-        
-        
-        
         
     def GiveAllFilles(path):
         #txt/docx/pdf
@@ -68,7 +54,7 @@ class TargetFille:
 
         with open("config.txt","r", encoding="utf-8") as config:
             txtConfig=TargetFille.NoEnter(config.readlines())
-            Target=txtConfig[0].split(" ")
+            Target=txtConfig[0]
             Size, Files=TargetFille.GiveAllFilles(txtConfig[1])
             
             if "0" in txtConfig[2]:#czy wielkosc liter ma znaczenie
@@ -83,160 +69,136 @@ class TargetFille:
                  
         return Target, Size, Files, IgnoreSize, ThreadNumber
     
-    
-    def FindText(self):
-        FilesTab=self.FilesTab
+
+    def FindText(self, over=None):
+        if over == None:
+            FilesTab=self.FilesTab[0]
+        else:
+            FilesTab=over
         Target=self.Target
-        IgnoreSize=self.IgnoreSize
-        n_Target=self.n_Target
-        n_pointer=0
-        endTable=[]
+        matches_count = 0
         
         if FilesTab!=[]:
             for file in FilesTab:
                 try:
-                    with open(file,"r",encoding="utf-8") as txtFile:
-                        endTable.append([file,0])
-                        allLines=TargetFille.NoEnter(TargetFille.NoSpace(txtFile.readlines()))
-                        for line in allLines:
-                            if regex.MATCH(line.upper(),Target[n_pointer].upper()+"[,.;?!]?"):
-                                if regex.MATCH(line,Target[n_pointer]+"[,.;?!]?") or IgnoreSize:
-                                    n_pointer+=1
-                                    if n_pointer==n_Target:
-                                        endTable[-1][1]+=1
-                                        n_pointer=0
-                                else:
-                                    n_pointer=0 
-                            else:
-                                n_pointer=0
-                               
-                        if endTable[-1][1]==0:
-                            endTable.pop()
+                    f = open(file,"r",encoding="utf-8")
+                    lines = f.readlines()
+                    f.close()
+
+                    text = ""
+                    for line in lines:
+                        text += line
+                    text = text.replace('\n', " ")
+                    matches_count = regex.MATCH(text,Target)
+
+                    #print("Found in txt:",matches_count)
+
                 except Exception as e:
                     print("Error in txtReader",e)
-        return endTable
+        return DUAL(matches_count,"txt",over)
     
-    def FindDocx(self):
+    def FindDocx(self, over=None):
         
-        FilesTab=self.FilesTab
+        if over == None:
+            FilesTab=self.FilesTab[1]
+        else:
+            FilesTab=over
         Target=self.Target
-        IgnoreSize=self.IgnoreSize
-        n_Target=self.n_Target
-        n_pointer=0
-        endTable=[]
+        matches_count = 0
         
         if FilesTab!=[]:
             for files in FilesTab:
                 try:
                     doc = Document(files)
-                    endTable.append([files,0])
-                    for para in doc.paragraphs:          
-                            if regex.MATCH(para.text.upper(),Target[n_pointer].upper()+"[,.;?!]?"):
-                                if regex.MATCH(para.text,Target[n_pointer]+"[,.;?!]?") or IgnoreSize:
-                                    n_pointer+=1
-                                    if n_pointer==n_Target:
-                                        endTable[-1][1]+=1
-                                        n_pointer=0
-                                else:
-                                    n_pointer=0 
-                            else:
-                                n_pointer=0
-                                
-                    if endTable[-1][1]==0:
-                        endTable.pop()
+                    text = ""
+                    for para in doc.paragraphs:
+                        text += para.text
+                    text.replace("\n"," ")
+                    
+                    matches_count = regex.MATCH(text,Target)
+
+                    #print("Found in docx:",matches_count)
+
                 except Exception as e:
                         print("Error in docxReader:",e)
-        return endTable
+        return DUAL(matches_count,"doc",over)
     
     
-    def FindPdf(self):
+    def FindPdf(self, over=None):
 
-        FilesTab=self.FilesTab
+        if over == None:
+            FilesTab=self.FilesTab[2]
+        else:
+            FilesTab=over
         Target=self.Target
-        IgnoreSize=self.IgnoreSize
-        n_Target=self.n_Target
-        n_pointer=0
-        endTable=[]
+        matches_count = 0
         
         if FilesTab!=[]:
             for files in FilesTab:
                 try:
-                    endTable.append([files,0])
                     pdf = fitz.open(files)
                     pdfSize=pdf.pageCount
+
+                    text = ""
+
                     for i in range(pdfSize):
                         page = pdf.loadPage(i)
-                        text=page.getText("text").split(" ")
-                        for line in text:
-                            if "Hawański".upper() in line.upper():
-                                print(line,"1",line.upper(),".?"+Target[n_pointer].upper()+".?") ###tutaj <<<<
-                            if regex.MATCH(line.upper(),".?"+Target[n_pointer].upper()+".?"):
-                                print(line,"Kurła")
-                                if regex.MATCH(line,".?"+Target[n_pointer]+".?") or IgnoreSize:
-                                    print(line,"2")
-                                    n_pointer+=1
-                                    if n_pointer==n_Target:
-                                        endTable[-1][1]+=1
-                                        n_pointer=0
-                                else:
-                                    n_pointer=0 
-                            else:
-                                n_pointer=0
-                                
-                                    
-                    if endTable[-1][1]==0:
-                        endTable.pop()
+                        text += page.getText("text")
+                        
+                    text.replace("\n"," ")
+
+                    matches_count = regex.MATCH(text,Target)
+
+                    #print("Found in pdf:",matches_count)
                 except Exception as e:
-                        print("Error in pdfReader:",e)
-        return endTable
+                        print("Error in pdfReader: ",e)
+        return DUAL(matches_count,"pdf",over)
 
-
-    def SumAllReads(files):
         
-        ListOfFiles=[]
-        if files[0].FilesTab!=[]:
-            ListOfFiles.append(files[0].FindText())
-        if files[1].FilesTab!=[]:
-            ListOfFiles.append(files[1].FindDocx())
-        if files[2].FilesTab!=[]:
-            ListOfFiles.append(files[2].FindPdf())        
-
-        suma=0
-        maximum=0
-        minimum=0
-        start=True
-        for m in ListOfFiles:
-            for n in m:
-                suma+=n[1]
-                if n[1]>maximum or start:
-                    maximum=n[1]
-                if n[1]<minimum or start:
-                    minimum=n[1]
-                if start:
-                    start=False
-        
-     
-        return ListOfFiles, suma, maximum, minimum
+            
+            
 
 
-    def returnList(tab):
-        with open("connector.txt","w+") as connector:
-            for column in tab:
-                for line in column:
-                    connector.write(line[0]+"; "+str(line[1])+"\n")
-    
-    def pieChart(allnr,tab):
+def launch(self,ext,over=None):
+    if ext == 0:
+        #print("Szukam txt")
+        return self.FindText([over])
+    elif ext == 1:
+        #print("Szukam docx")
+        return self.FindDocx([over])
+    elif ext == 2:
+        #print("Szukam pdf")
+        return self.FindPdf([over])
+    else:
+        print("Coś Ci się pojebało stary, chcesz wpierdol?")
+
+
+
+
+
+
+
+
+
+def pieChart(tab): #ile wszystkich znalezionych; wszystkie które mają cokolwiek
+        allnr = len(tab)
         label=[]
         amount=[]
         sal=0
-        for column in tab:
-                for line in column:
-                    sal+=1
-                    if line[1] in label:
-                        amount[label.index(line[1])]+=1
-                    else:
-                        label.append(line[1])
-                        amount.append(1)
+
+        for i in range(len(tab)):
+            if (tab[i][1] > 0):
+                sal += 1
+                if tab[i][1] in label:
+                    amount[label.index(tab[i][1])]+=1
+                else:
+                    label.append(tab[i][1])
+                    amount.append(1)
+
+        #print(label)
+        #print(amount)
+        #print(sal)
+
         allnr-=sal
         if allnr>0:
             label.append(0)
@@ -249,26 +211,46 @@ class TargetFille:
         ax1.pie(amount, labels=label, autopct='%1.1f%%',startangle=90)
         ax1.axis('equal')
         
-        plt.show()#zminić na zapis
+        #plt.show()#zminić na zapis
+        plt.savefig("pieChart.png",dpi=200)
         
         
-    def barChart(alltab,tab):
+def barChart(tab): #wszystkie pliki, wszystkie gdzie coś znalezione
 
         amount=[0,0,0]
         allamount=[0,0,0]
+
+        for i in range(len(tab)):
+            if tab[i][2] == "txt" and tab[i][1] > 0:
+                amount[0] += 1
+            elif tab[i][2] == "doc" and tab[i][1] > 0:
+                amount[1] += 1
+            elif tab[i][2] == "pdf" and tab[i][1] > 0:
+                amount[2] += 1
+            else:
+                print("Zero samuraju, całe zero...")
         
-        for c in range(len(tab)):
-                for line in tab[c]:
-                    amount[c]+=1
-       # print(amount)
-        for c in range(len(alltab)):
-                for line in alltab[c]:
-                    allamount[c]+=1
-                allamount[c]-=amount[c]
-       # print(allamount)             
+        
+        #print(amount)
+
+        for i in range(len(tab)):
+            if tab[i][2] == "txt":
+                allamount[0] += 1
+            elif tab[i][2] == "doc":
+                allamount[1] += 1
+            elif tab[i][2] == "pdf":
+                allamount[2] += 1
+            else:
+                print("Zero samuraju, całe zero...")
+
+        allamount[0] -= amount[0]
+        allamount[1] -= amount[1]
+        allamount[2] -= amount[2]
+        #print(allamount)
+
         
     
-        labels = ['.txt', '.docx', '.pdf']
+        labels = ['.txt', '.doc', '.pdf']
     
     
         width = 0.35       # the width of the bars: can also be len(x) sequence
@@ -282,126 +264,109 @@ class TargetFille:
         ax.set_title('Distribution by extensions')
         ax.legend()
         
-        plt.show()
+        #plt.show()
+        plt.savefig("barChart.png",dpi=200)
+        
+	
+def axischar(tab):
+        maximum = tab[0][1]
+        minimum = tab[0][1]
+        ilosc = len(tab)
+        for i in range(1,len(tab)):
+            if tab[i][1] > maximum:
+                maximum = tab[i][1]
+            if tab[i][1] < minimum:
+                minimum = tab[i][1]
+
+
+        sred=maximum+minimum
+        sred/=ilosc
+        #print(minimum,maximum,sred)
         
         
+        fig, ax = plt.subplots()
+        ax.plot([maximum,minimum],[0,0], label="przestrzeń na której są wyniki",linewidth=2.0)
+        ax.scatter([sred], [0],270, label="Srednia",marker="|",color="red")
+        ax.legend() 
+        plt.gca().axes.yaxis.set_ticklabels([])
         
-    def deleteEmpty(tab):
-        for x in range(len(tab)):
-            if tab[x]==[]:
-                tab.pop(x)
-                TargetFille.deleteEmpty(tab)
-                break
-        return tab
-        
-    def dtf(tab):
-        ntab=[]
-        if len(tab)==2 and type(tab[1])==int:
-            return tab
-        for x in tab:
-            ntab.extend(TargetFille.dtf(x))
-        return ntab
-    
-    def nextdtf(tab):
-        tab=TargetFille.dtf(tab)
-        newtab=[[],[],[]]
-        for x in range(int(len(tab)/2)):
-            if "txt" in tab[x*2]:        
-                newtab[0].append([tab[x*2],tab[x*2+1]])
-            
-            if "doc" in tab[x*2] or "docx" in tab[x*2]:        
-                newtab[1].append([tab[x*2],tab[x*2+1]])
-                              
-            if "pdf" in tab[x*2]:        
-                newtab[2].append([tab[x*2],tab[x*2+1]])
-        return(newtab)   
-        
-            
-            
+        #plt.show()
+        plt.savefig("axisChart.png",dpi=200)
 
 
 
-#zamienic jako arg
-def main():
-
-    Target, Size, Files, IgnoreSize, ThreadNumber=TargetFille.ConfigurationFile()
-    
-    
-    threads=[]
-    
-    ltab=[]
-    sums=0
-    for x in range(3):
-        sums+=len(Files[x])
-    if sums<ThreadNumber:
-        ThreadNumber=sums
-        
-    
-    for i in range(ThreadNumber):
-        threads.append([[],[],[]])
-        
-        
-    for x in range(3):
-        ltab.append(len(Files[x]))
-    k=0
-    for x in range(max(ltab)):
-        for y in range(3):
-            if ltab[y]>x:
-                threads[k%ThreadNumber][y].append(Files[y][x])
-        
-        
-        k+=1     
-    
-    NumberOfFilles=0
-    for x in range(3):
-        NumberOfFilles+=len(Files[x])
-        
-    ListOfFiles=[]
-    suma=0
-    maximum=0
-    minimum=0
-    nee=True
-    
-    
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = []
-        for thread in threads:
-            ObjectFiles=[] 
-            ObjectFiles.append(TargetFille(thread[0], Target, IgnoreSize,'.txt'))     
-            ObjectFiles.append(TargetFille(thread[1], Target, IgnoreSize,'.doc'))   
-            ObjectFiles.append(TargetFille(thread[2], Target, IgnoreSize,'.pdf'))
-            #newlist, newSuma, newmaximum, newminimum = TargetFille.SumAllReads(ObjectFiles)
-            futures.append(executor.submit(TargetFille.SumAllReads, ObjectFiles))
-
-        for future in concurrent.futures.as_completed(futures):
-            try:
-                newlist, newSuma, newmaximum, newminimum=future.result()
-                if newlist!=[]: 
-                    ListOfFiles.extend(newlist)
-                    suma+=newSuma
-                    if maximum<newmaximum or nee:
-                        maximum=newmaximum
-                    if newminimum<minimum or nee:
-                        minimum=newminimum
-                    if nee:   
-                        nee=False
-            except Exception as e:
-                print("Thread Error.", e)
-   
-   
-    
-    
-   
-        
-    ListOfFiles=TargetFille.nextdtf(TargetFille.deleteEmpty(ListOfFiles))
-    
-    TargetFille.returnList(ListOfFiles)
-    TargetFille.pieChart(len(Files),ListOfFiles)
-
-    TargetFille.barChart(Files,ListOfFiles)
 
 
+        
+
+
+MAX_CPU_CORES = 16
 
 
 if __name__ == "__main__":
-    main()
+    freeze_support()
+
+    Target, Size, Files, IgnoreSize, ThreadNumber=TargetFille.ConfigurationFile()
+    main_thread = TargetFille(Files, Target)
+    
+
+    AllTargets = []
+    for i in range(len(Files[0])):
+        AllTargets.append(Files[0][i])
+    for i in range(len(Files[1])):
+        AllTargets.append(Files[1][i])
+    for i in range(len(Files[2])):
+        AllTargets.append(Files[2][i])
+
+    cores_used = len(AllTargets)
+    print("Files count: ",cores_used)
+
+    cores_used = min(cores_used,MAX_CPU_CORES)
+
+    print("Used cores: ",cores_used)
+
+    pool = Pool(cores_used)
+
+    results = []
+    
+    for i in range(len(AllTargets)):
+        target = AllTargets[i].split(".")[len(AllTargets[i].split("."))-1]
+        if (target.find("txt") != -1):
+            results.append(pool.apply_async(launch,args=(main_thread,0,AllTargets[i])))
+        elif (target.find("doc") != -1):
+            results.append(pool.apply_async(launch,args=(main_thread,1,AllTargets[i])))
+        elif (target.find("pdf") != -1):
+            results.append(pool.apply_async(launch,args=(main_thread,2,AllTargets[i])))
+        else:
+            print("Hola hola samuraju  mamy",target, "do spalenia")
+
+    pool.close()
+    pool.join()
+    
+    resultt = [result.get() for result in results]
+
+    result = resultt
+
+    print("Output:")
+    Files = []
+    for i in result:
+        Files.append([i.name[0],i.ile,i.ext])
+        #print(i.ile,i.ext,i.name[0])
+
+
+    print("Saving output")
+
+    try:
+        f = open("connector.txt","w+",encoding="utf-8")
+        for i in range(len(Files)):
+            if Files[i][1] > 0:
+                f.write(Files[i][0]+"; "+str(Files[i][1])+"\n")
+        f.close()
+    except:
+        print("Coś się zjebało upsik")
+
+
+    barChart(Files)
+    axischar(Files)
+    pieChart(Files)
+                    

@@ -8,6 +8,9 @@ using System.Linq;
 using Szperacz.Core.Models;
 using Ookii.Dialogs.Wpf;
 using System.Timers;
+using System.Threading;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Szperacz.Core.ViewModels
 {
@@ -25,11 +28,11 @@ namespace Szperacz.Core.ViewModels
 
         private double _messageBoxVisibility = 0;
         private string _messageBoxText = "Nieprawidłowa wartość!";
-        private readonly Timer timer = new Timer(2000);
+        private readonly System.Timers.Timer timer = new System.Timers.Timer(2000);
 
         private ObservableCollection<PathModel> _outputPathList = new ObservableCollection<PathModel>();
-        private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "1", "2", "3", "4", "5", "10", "20", "30", "50" };
-        private int _selectedThreadIndex = 3;
+        private ObservableCollection<String> _cpuThreadList = new ObservableCollection<String>() { "1", "2", "4", "8", "16", "32", "64" };
+        private int _selectedThreadIndex = 0;
 
         private readonly ObservableCollection<SearchModel> historyList = new ObservableCollection<SearchModel>(HistoryHandler.DeserializeHistoryList());
         private ObservableCollection<string> _pathHistoryList = new ObservableCollection<string>();
@@ -47,6 +50,21 @@ namespace Szperacz.Core.ViewModels
         }
 
         #region Helper Methods
+        /// <summary>
+        /// Clear graphs in the GUI and delete images.
+        /// </summary>
+        private void DeleteGraphs()
+        {
+            var graphPaths = SearchHandler.GetChartPaths();
+            foreach(var x in graphPaths)
+            {
+                if (File.Exists(x))
+                {
+                    File.Delete(x);
+                }
+            }
+        }
+
         /// <summary>
         /// Add a new object to the history and refreshes view.
         /// </summary>
@@ -73,9 +91,9 @@ namespace Szperacz.Core.ViewModels
 
         private void ClearGraphs()
         {
-            Chart1Path = "";
-            Chart2Path = "";
-            Chart3Path = "";
+            Chart1Path = null;
+            Chart2Path = null;
+            Chart3Path = null;
         }
 
         /// <summary>
@@ -85,11 +103,13 @@ namespace Szperacz.Core.ViewModels
         /// <param name="interval">Time of the waring</param>
         private void ShowWarning(string text, double interval = 2000)
         {
+            Debug.WriteLine("Show warning");
             MessageBoxText = text;
             MessageBoxVisibility = 35;
             timer.Elapsed += timerElapsed;
             timer.Interval = interval;
             timer.Start();
+            Debug.WriteLine("End function");
         }
 
         /// <summary>
@@ -99,12 +119,21 @@ namespace Szperacz.Core.ViewModels
         {
             MessageBoxVisibility = 0;
             timer.Stop();
+            Debug.WriteLine("End warning");
         }
         #endregion
 
         #region Commands and methods for buttons
         public IMvxCommand ShowGraph1Command { get; set; }
         public IMvxCommand ShowGraph2Command { get; set; }
+
+        private MvxNotifyTask _myTaskNotifier;
+        public MvxNotifyTask MyTaskNotifier
+        {
+            get => _myTaskNotifier;
+            private set => SetProperty(ref _myTaskNotifier, value);
+        }
+
 
         /// <summary>
         /// Change the main graph to Graph1
@@ -152,6 +181,7 @@ namespace Szperacz.Core.ViewModels
         public void SearchWord()
         {
             ControlHelper.WordToFind = Word;
+            ControlHelper.AutomaticSelection = AutomaticSelection;
 
             if (IsCorrectPath(Path) && Word.Length > 0)
             {
@@ -169,6 +199,7 @@ namespace Szperacz.Core.ViewModels
                         Chart1Path = graphPaths[0];
                         Chart2Path = graphPaths[1];
                         Chart3Path = graphPaths[2];
+                        Debug.WriteLine(Chart1Path);
                     }
                     else
                     {
@@ -182,7 +213,7 @@ namespace Szperacz.Core.ViewModels
                     ShowWarning("Nie znaleziono frazy w podanej ścieżce!", 3000);
                 }
             }
-            else 
+            else
             {
                 ClearGraphs();
                 OutputPathList = new ObservableCollection<PathModel>();
@@ -196,7 +227,7 @@ namespace Szperacz.Core.ViewModels
         public int SelectedThreadIndex
         {
             get { return _selectedThreadIndex; }
-            set { SetProperty(ref _selectedThreadIndex, value); }
+            set { SetProperty(ref _selectedThreadIndex, value); ClearGraphs(); }
         }
 
         public string MessageBoxText
@@ -256,19 +287,23 @@ namespace Szperacz.Core.ViewModels
         public bool CreateChart
         {
             get { return _createChart; }
-            set { _createChart = value; }
+            set 
+            { 
+                _createChart = value;
+                ClearGraphs();
+            }
         }
 
         public bool LetterSizeMeans
         {
             get { return _letterSizeMeans; }
-            set { _letterSizeMeans = value; }
+            set { _letterSizeMeans = value; ClearGraphs(); }
         }
 
         public bool AutomaticSelection
         {
             get { return _automaticSelection; }
-            set { _automaticSelection = value; }
+            set { _automaticSelection = value; ControlHelper.AutomaticSelection = AutomaticSelection; }
         }
 
         public string Path
@@ -277,6 +312,7 @@ namespace Szperacz.Core.ViewModels
             set
             {
                 SetProperty(ref _path, value);
+                ClearGraphs();
             }
         }
 
@@ -286,6 +322,7 @@ namespace Szperacz.Core.ViewModels
             set
             {
                 SetProperty(ref _word, value);
+                ClearGraphs();
             }
         }
         #endregion

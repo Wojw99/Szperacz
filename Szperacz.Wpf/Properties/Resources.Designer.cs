@@ -61,6 +61,15 @@ namespace Szperacz.Wpf.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Please wait....
+        /// </summary>
+        public static string AlertPleaseWait {
+            get {
+                return ResourceManager.GetString("AlertPleaseWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Searcher.
         /// </summary>
         public static string AppName {

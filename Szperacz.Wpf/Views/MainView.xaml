@@ -8,7 +8,7 @@
              xmlns:cl="clr-namespace:Szperacz.Wpf.Controls" 
              xmlns:p="clr-namespace:Szperacz.Wpf.Properties"   
              xmlns:local="clr-namespace:Szperacz.Wpf.Views"     
-             mc:Ignorable="d"
+             mc:Ignorable="d" MouseMove="MvxWpfView_MouseMove"
              d:Height="720" d:Width="1280" FontSize="16" Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -79,7 +79,8 @@
         <!-- Column 1, Row 6 -->
         <Button Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" MaxWidth="80" MaxHeight="30"
                 mvx:Bi.nd="Command SearchCommand" 
-                Content="{x:Static p:Resources.ButtonSearch}"/>
+                Content="{x:Static p:Resources.ButtonSearch}" 
+                PreviewMouseLeftButtonDown="Button_PreviewMouseLeftButtonDown"/>
         
         <!-- Column 1, Row 7 -->
         <ListBox x:Name="listBoxPaths" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2"
@@ -106,7 +107,7 @@
         <!-- Column 5, Row 1 -->
         <Border Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" Padding="15">
             <Button mvx:Bi.nd="Command ShowGraph1Command" Background="Transparent" BorderThickness="0">
-                <Image Source="{Binding Chart1Path}"/>
+                <Image Source="{Binding Chart1Path}" x:Name="graph1"/>
             </Button>
         </Border>
 
@@ -128,6 +129,12 @@
                 Height="{Binding MessageBoxVisibility}"
                 BorderBrush="Gray" BorderThickness="1" Background="LightGoldenrodYellow">
             <TextBlock Text="{Binding MessageBoxText}" TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5"/>
+        </Border>
+
+        <Border x:Name="borderWait" Grid.ColumnSpan="8" Grid.RowSpan="10" 
+                Background="LightGray" Opacity="0.2" Visibility="Hidden">
+            <TextBlock Text="{x:Static p:Resources.AlertPleaseWait}" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       FontSize="45"/>
         </Border>
     </Grid>
 </views:MvxWpfView>

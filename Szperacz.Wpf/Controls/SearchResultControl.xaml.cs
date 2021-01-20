@@ -22,42 +22,17 @@ namespace Szperacz.Wpf.Controls
         {
             try
             {
-                var startInfo = new ProcessStartInfo();      
-
-                startInfo.FileName = PathResult.ToString();
-                startInfo.Arguments = "\"" + PathResult.ToString() + "\"";
-                startInfo.UseShellExecute = true;
-
-                Process.Start(startInfo);
-                await Task.Delay(500);
-
-                var path = PathResult as string;
-                if (path.Contains(".txt"))
-                {
-                    SimulateCtrlPlusF();
-                }
+                await ControlHelper.OpenTxtFile(PathResult as string);
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message + "\n" + PathResult.ToString());
+                MessageBox.Show(ex.Message + "\n" + PathResult.ToString());
             }
-        }
-
-        private void SimulateCtrlPlusF()
-        {
-            var sim = new InputSimulator();
-            var wordToType = ControlHelper.WordToFind;
-            sim.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_F)
-                .TextEntry(wordToType)
-                .KeyPress(VirtualKeyCode.RETURN)
-                .Sleep(200)
-                .KeyPress(VirtualKeyCode.CANCEL);
         }
 
         private void SearchResultControl_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            //SendKeys.SendWait("{ENTER}");
-            System.Windows.MessageBox.Show(ControlHelper.WordToFind);
+            MessageBox.Show(ControlHelper.WordToFind);
         }
 
         private void comboBoxPhrases_Loaded(object sender, RoutedEventArgs e)

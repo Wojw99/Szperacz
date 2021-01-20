@@ -14,10 +14,31 @@ namespace Szperacz.Core
     /// </summary>
     public static class SearchHandler
     {
-        private static readonly string pathListPath = "Src/paths.txt";
         private static readonly string configPath = "Src/config.txt";
         private static readonly string connectorPath = "Src/connector.txt";
-        private static readonly string[] chartPaths = new string[] { };
+        private static readonly List<string> chartPaths = new List<string>() {
+                AppDomain.CurrentDomain.BaseDirectory + @"Src\axisChart.png",
+                AppDomain.CurrentDomain.BaseDirectory + @"Src\pieChart.png",
+                AppDomain.CurrentDomain.BaseDirectory + @"Src\barChart.png"};
+        private static List<string> tmpFiles = new List<string>();
+
+        private static void CopyFiles()
+        {
+            foreach(var s in chartPaths)
+            {
+                string copy = Path.GetTempFileName().Replace(".tmp", $"{tmpFiles.Count}.tmp");
+                File.Copy(s, copy);
+                tmpFiles.Add(copy);
+            }
+        }
+
+        public static void DeleteAllTempFiles()
+        {
+            foreach (string file in tmpFiles)
+            {
+                File.Delete(file);
+            }
+        }
 
         /// <summary>
         /// Gives arguments to the python script and turn on it.
@@ -42,7 +63,10 @@ namespace Szperacz.Core
             start.RedirectStandardOutput = true;
             start.RedirectStandardError = true;
             start.LoadUserProfile = true;
+            start.CreateNoWindow = true;
+            start.Verb = "runas";
 
+            //await Task.Run(() => Process.Start(start));
             // Start the proccess and get the output from python script
             using (Process process = Process.Start(start))
             {
@@ -54,6 +78,8 @@ namespace Szperacz.Core
                     Debug.WriteLine(result);
                 }
             }
+
+            CopyFiles();
         }
 
         /// <summary>
@@ -131,10 +157,15 @@ namespace Szperacz.Core
         public static List<String> GetChartPaths()
         {
             return new List<string>() {
-                @"D:\Development\GitHub\Szperacz\Szperacz.Wpf\Src\chart1.png",
-                @"D:\Development\GitHub\Szperacz\Szperacz.Wpf\Src\chart2.png",
-                @"D:\Development\GitHub\Szperacz\Szperacz.Wpf\Src\chart3.jpg"
+                tmpFiles[tmpFiles.Count - 3],
+                tmpFiles[tmpFiles.Count - 2],
+                tmpFiles[tmpFiles.Count - 1]
             };
+            //return new List<string>() {
+            //    AppDomain.CurrentDomain.BaseDirectory + @"Src\axisChart.png",
+            //    AppDomain.CurrentDomain.BaseDirectory + @"Src\pieChart.png",
+            //    AppDomain.CurrentDomain.BaseDirectory + @"Src\barChart.png"
+            //};
         }
     }
 }

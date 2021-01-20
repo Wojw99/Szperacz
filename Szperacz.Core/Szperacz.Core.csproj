@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="InputSimulator" Version="1.0.4" />
     <PackageReference Include="IronPython" Version="2.7.11" />
     <PackageReference Include="MvvmCross" Version="7.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />

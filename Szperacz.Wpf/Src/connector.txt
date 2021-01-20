@@ -1,3 +1,4 @@
-C:\Users\Jakub Si³ka\Desktop\IO\lokacja\TEXT.txt; 4
-C:\Users\Jakub Si³ka\Desktop\IO\lokacja\DOCX.docx; 4
-C:\Users\Jakub Si³ka\Desktop\IO\lokacja\PDF.pdf; 2
+D:\Development\GitHub\Szperacz\XUnitTestLibrary\lokacja\PDF-B.pdf; 2
+D:\Development\GitHub\Szperacz\XUnitTestLibrary\lokacja\PDF.pdf; 2
+D:\Development\GitHub\Szperacz\XUnitTestLibrary\lokacja\TEXT.txt; 2
+D:\Development\GitHub\Szperacz\XUnitTestLibrary\lokacja\DOCX.docx; 2

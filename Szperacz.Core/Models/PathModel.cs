@@ -21,5 +21,17 @@ namespace Szperacz.Core.Models
         {
             return $"{Path} {PhraseAmount} {MatchingPhrases}";
         }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as PathModel;
+
+            if(this.Path == other.Path && this.PhraseAmount == other.PhraseAmount)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
