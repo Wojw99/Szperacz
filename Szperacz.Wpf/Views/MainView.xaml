@@ -9,7 +9,7 @@
              xmlns:p="clr-namespace:Szperacz.Wpf.Properties"   
              xmlns:local="clr-namespace:Szperacz.Wpf.Views"     
              mc:Ignorable="d" MouseMove="MvxWpfView_MouseMove"
-             d:Height="720" d:Width="1280" FontSize="16" Background="White">
+             d:Height="720" d:Width="1280" FontSize="16" Background="AliceBlue">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/> 
@@ -129,17 +129,30 @@
             <Grid>
                 <TextBlock Text="..." Background="White"
                            HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5"/>
+                <!-- Please wait... --> 
                 <TextBlock Text="{x:Static p:Resources.AlertPleaseWait}" x:Name="borderWait" Visibility="Hidden" Background="White"
                            HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5"/>
+               
+                <!-- Welcome -->
+                <TextBlock Text="{x:Static p:Resources.Welcome}" 
+                           Height="{Binding MbHeightWelcome}"
+                           TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5" Background="White"/>
+                <!-- Phrase incorrect -->
                 <TextBlock Text="{x:Static p:Resources.WarningPhraseIncorrect}" 
                            Height="{Binding MbHeightPhraseIncorrect}"
                            TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5" Background="White"/>
+
+                <!-- Path incorrect -->
                 <TextBlock Text="{x:Static p:Resources.WarningPathIncorrect}" 
                            Height="{Binding MbHeightPathIncorrect}"
                            TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5" Background="White"/>
+
+                <!-- Not found -->
                 <TextBlock Text="{x:Static p:Resources.WarningNotFound}" 
                            Height="{Binding MbHeightNotFound}"
                            TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5" Background="White"/>
+
+                <!-- Other -->
                 <TextBlock Text="{Binding MessageBoxText}" 
                            Height="{Binding MessageBoxVisibility}"
                            TextAlignment="Center" FontSize="18" FontWeight="Bold" Padding="5" Background="White"/>

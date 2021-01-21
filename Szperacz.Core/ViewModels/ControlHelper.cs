@@ -73,6 +73,7 @@ namespace Szperacz.Core.ViewModels
     {
         PhraseIncorrect,
         PathIncorrect,
-        PhraseNotFound
+        PhraseNotFound,
+        Welcome
     }
 }

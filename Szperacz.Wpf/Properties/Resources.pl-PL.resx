@@ -156,4 +156,7 @@
   <data name="WatermarkPhrase" xml:space="preserve">
     <value>Fraza do wyszukania</value>
   </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Witaj!</value>
+  </data>
 </root>

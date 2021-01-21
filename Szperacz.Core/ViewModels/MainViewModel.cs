@@ -28,6 +28,7 @@ namespace Szperacz.Core.ViewModels
         private double _mbHeightPhraseIncorrect = 0;
         private double _mbHeightNotFound = 0;
         private double _mbHeightPathIncorrect = 0;
+        private double _mbHeightWelcome = 0;
         private string _messageBoxText = "Nieprawidłowa wartość!";
         private readonly Timer timer = new Timer(2000);
 
@@ -48,6 +49,8 @@ namespace Szperacz.Core.ViewModels
 
             PathHistoryList = new ObservableCollection<string>(historyList.Select(m => m.FolderPath).Reverse());
             PhraseHistoryList = new ObservableCollection<string>(historyList.Select(m => m.Phrase).Reverse());
+
+            ShowWarning(MessageType.Welcome);
         }
 
         #region Helper Methods
@@ -115,6 +118,10 @@ namespace Szperacz.Core.ViewModels
             {
                 MbHeightNotFound = 35;
             }
+            else if (type == MessageType.Welcome)
+            {
+                MbHeightWelcome = 35;
+            }
             timer.Elapsed += timerElapsed;
             timer.Interval = interval;
             timer.Start();
@@ -129,6 +136,7 @@ namespace Szperacz.Core.ViewModels
             MbHeightNotFound = 0;
             MbHeightPhraseIncorrect = 0;
             MbHeightPathIncorrect = 0;
+            MbHeightWelcome = 0;
             timer.Stop();
         }
         #endregion
@@ -250,6 +258,12 @@ namespace Szperacz.Core.ViewModels
         {
             get { return _messageBoxVisibility; }
             set { SetProperty(ref _messageBoxVisibility, value); }
+        }
+
+        public double MbHeightWelcome
+        {
+            get { return _mbHeightWelcome; }
+            set { SetProperty(ref _mbHeightWelcome, value); }
         }
         public double MbHeightPhraseIncorrect
         {

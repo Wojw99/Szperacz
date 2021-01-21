@@ -176,5 +176,14 @@ namespace Szperacz.Wpf.Properties {
                 return ResourceManager.GetString("WatermarkPhrase", resourceCulture);
             }
         }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Welcome!.
+        /// </summary>
+        public static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
     }
 }
